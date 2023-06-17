@@ -19,6 +19,10 @@ const Profile = () => {
     UserService.getUserProfile(accessToken).then(
       (response) => {
         setUser(response.data);
+        const { username } = response.data;
+        if (!userName) {
+          localStorage.setItem("username", username);
+        }
       },
       (error) => {
         const _content =

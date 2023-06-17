@@ -19,7 +19,7 @@ const App = () => {
   const refreshToken = localStorage.getItem("refreshToken");
   const accessToken = localStorage.getItem("accessToken");
 
-  const isLogin = username && username.length > 0;
+  const isLogin = accessToken && accessToken.length > 0;
   const [_, setIsLoggedIn] = useState(isLogin);
 
   const { user: currentUser } = useSelector((state) => state.auth);
