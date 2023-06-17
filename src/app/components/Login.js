@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import qs from "query-string";
 
 import { login } from "../slices/auth";
 import { clearMessage } from "../slices/message";
 
 const Login = () => {
-  const username = localStorage.getItem("username");
-  const isLogin = username && username.length > 0;
-  let navigate = useNavigate();
+  const accessToken = localStorage.getItem("accessToken");
+  const isLogin = accessToken && accessToken.length > 0;
+  const navigate = useNavigate();
+
+  const searchParams = useLocation().search;
+  const query = qs.parse(searchParams);
+  const {
+    accessToken: accessTokenFromSocialLogin,
+    refreshToken: refreshTokenFromSocialLogin,
+  } = query;
 
   const [loading, setLoading] = useState(false);
 
@@ -20,6 +28,10 @@ const Login = () => {
 
   useEffect(() => {
     dispatch(clearMessage());
+    if (query.accessToken) {
+      localStorage.setItem("accessToken", accessTokenFromSocialLogin);
+      localStorage.setItem("refreshToken", refreshTokenFromSocialLogin);
+    }
   }, [dispatch]);
 
   const initialValues = {
@@ -115,9 +127,13 @@ const Login = () => {
             </Form>
           )}
         </Formik>
-        <a href="/oauth2/authorization/kakao">Kakao Login</a>
-        <a href="/oauth2/authorization/google">Google Login</a>
-        <a href="http://localhost:8080/oauth2/authorization/naver">
+        <a href="http://localhost:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:3000/login">
+          Kakao Login
+        </a>
+        <a href="http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000/login">
+          Google Login
+        </a>
+        <a href="http://localhost:8080/oauth2/authorization/naver?redirect_uri=http://localhost:3000/login">
           Naver Login
         </a>
       </div>

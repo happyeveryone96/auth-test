@@ -3,11 +3,12 @@ import { Navigate } from "react-router-dom";
 
 const Home = () => {
   const [content, setContent] = useState("");
+  const accessToken = localStorage.getItem("accessToken");
   const username = localStorage.getItem("username");
-  const isLogin = username && username.length > 0;
+  const isLogin = accessToken && accessToken.length > 0;
 
   useEffect(() => {
-    setContent(username);
+    setContent(accessToken);
   }, []);
 
   if (!isLogin) {
@@ -17,7 +18,7 @@ const Home = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>name: {content}</h3>
+        <h3>name: {content === "" ? "X" : username}</h3>
       </header>
     </div>
   );

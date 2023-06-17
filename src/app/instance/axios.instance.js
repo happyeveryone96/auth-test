@@ -13,11 +13,10 @@ instance.interceptors.request.use(
     return config;
   },
   async function (error) {
+    console.log(error);
     if (error.status === 401) {
       console.log(error);
-      // return await resetTokenAndReattemptRequest(error);
     }
-    // Do something with request error
     return Promise.reject(error);
   }
 );
