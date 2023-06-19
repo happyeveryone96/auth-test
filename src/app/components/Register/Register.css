@@ -1,0 +1,18 @@
+.register-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.register-container .text-xs-center a {
+  color: #5cb85c;
+}
+
+.register-container .btn {
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+}
+
+.invalid-feedback {
+  position: relative;
+  bottom: 10px;
+}

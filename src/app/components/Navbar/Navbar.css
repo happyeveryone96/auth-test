@@ -1,0 +1,8 @@
+.nav-container {
+  width: 100vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
