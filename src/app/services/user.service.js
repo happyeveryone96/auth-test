@@ -1,21 +1,5 @@
 import { instance } from "../instance/axios.instance";
 
-const getPublicContent = () => {
-  return instance.get("all");
-};
-
-const getTest = (accessToken) => {
-  return instance
-    .get("test", {
-      headers: {
-        Authorization: accessToken ? `Bearer ${accessToken}` : accessToken,
-      },
-    })
-    .then((response) => {
-      return response.data;
-    });
-};
-
 const getUserProfile = (accessToken) => {
   return instance.get("user", {
     headers: {
@@ -47,21 +31,9 @@ const editProfile = (username, password, accessToken) => {
     });
 };
 
-const getModeratorBoard = () => {
-  return instance.get("mod");
-};
-
-const getAdminBoard = () => {
-  return instance.get("admin");
-};
-
 const UserService = {
-  getPublicContent,
   getUserProfile,
   editProfile,
-  getModeratorBoard,
-  getAdminBoard,
-  getTest,
 };
 
 export default UserService;
