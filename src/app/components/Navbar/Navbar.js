@@ -11,7 +11,7 @@ const Navbar = () => {
   const accessToken = localStorage.getItem("accessToken");
 
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const user = useSelector((state) => state.auth.user);
+  const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 

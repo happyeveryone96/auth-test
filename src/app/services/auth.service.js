@@ -16,7 +16,6 @@ const login = (email, password) => {
       password,
     })
     .then((response) => {
-      console.log(response);
       if (response.data) {
         const { accessToken, refreshToken, name } = response.data;
 
@@ -63,16 +62,11 @@ const reissuanceToken = (refreshToken) => {
     .catch((err) => console.log(err));
 };
 
-const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem("username"));
-};
-
 const AuthService = {
   register,
   login,
   logout,
   reissuanceToken,
-  getCurrentUser,
 };
 
 export default AuthService;
