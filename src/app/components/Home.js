@@ -1,24 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import UserService from "../services/user.service";
 
 const Home = () => {
-  const [content, setContent] = useState("");
   const accessToken = localStorage.getItem("accessToken");
-  const username = localStorage.getItem("username");
-  const isLogin = accessToken && accessToken.length > 0;
+  const [user, setUser] = useState("");
+  const userName = localStorage.getItem("username");
+  const { userId, email, username } = user;
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    setContent(accessToken);
-  }, []);
-
-  if (!isLogin) {
-    return <Navigate to="/login" />;
-  }
+    if (accessToken) {
+      UserService.getUserProfile(accessToken).then(
+        (response) => {
+          setUser(response.data);
+          const { username } = response.data;
+          if (!userName) {
+            localStorage.setItem("username", username);
+          }
+        },
+        (error) => {
+          const _content =
+            (error.response && error.response.data) ||
+            error.message ||
+            error.toString();
+          setUser(_content);
+        }
+      );
+    } else {
+      setUser("");
+    }
+  }, [userName, accessToken]);
 
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>name: {content === "" ? "X" : username}</h3>
+        <h2>Home</h2>
+        <h3>Id: {isLoggedIn && userId}</h3>
+        <h3>Email: {isLoggedIn && email}</h3>
+        <h3>Username: {isLoggedIn && username}</h3>
       </header>
     </div>
   );

@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate, useLocation } from "react-router-dom";
+import { Navigate, useNavigate, useLocation, Link } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import qs from "query-string";
 
-import { login } from "../slices/auth";
-import { clearMessage } from "../slices/message";
+import { login, socialLogin } from "../../slices/auth";
+import { clearMessage } from "../../slices/message";
+
+import SocialLogin from "../SocialLogin";
+
+import "./Login.css";
 
 const Login = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -31,8 +35,14 @@ const Login = () => {
     if (query.accessToken) {
       localStorage.setItem("accessToken", accessTokenFromSocialLogin);
       localStorage.setItem("refreshToken", refreshTokenFromSocialLogin);
+      dispatch(socialLogin(query.accessToken));
     }
-  }, [dispatch]);
+  }, [
+    dispatch,
+    accessTokenFromSocialLogin,
+    refreshTokenFromSocialLogin,
+    query.accessToken,
+  ]);
 
   const initialValues = {
     email: "",
@@ -40,8 +50,8 @@ const Login = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required("This field is required!"),
-    password: Yup.string().required("This field is required!"),
+    email: Yup.string().required("email can't be blank"),
+    password: Yup.string().required("password can't be blank"),
   });
 
   const handleLogin = (formValue) => {
@@ -52,39 +62,36 @@ const Login = () => {
     dispatch(login({ email, password }))
       .unwrap()
       .then(() => {
-        navigate("/profile");
-      })
-      .catch(() => {
+        navigate("/");
         setLoading(false);
       });
   };
 
   if (isLogin) {
-    return <Navigate to="/profile" />;
+    return <Navigate to="/" />;
   }
 
   return (
-    <div className="col-md-12 login-form">
-      <div className="card card-container">
-        <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        />
-        <Formik
-          initialValues={initialValues}
-          validationSchema={validationSchema}
-          onSubmit={handleLogin}
-        >
-          {({ errors, touched }) => (
-            <Form>
-              <div className="form-group">
-                <label htmlFor="email">Email</label>
+    <div>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleLogin}
+      >
+        {({ errors, touched }) => (
+          <Form>
+            <div className="login-container">
+              <div className="col-md-6 offset-md-3 col-xs-12">
+                <h1 className="text-xs-center">Sign in</h1>
+                <p className="text-xs-center">
+                  <Link to="/register">Need an account?</Link>
+                </p>
                 <Field
+                  placeholder="Email"
                   name="email"
                   type="text"
                   className={
-                    "form-control" +
+                    "form-group form-control form-control-lg" +
                     (errors.email && touched.email ? " is-invalid" : "")
                   }
                 />
@@ -93,15 +100,12 @@ const Login = () => {
                   component="div"
                   className="invalid-feedback"
                 />
-              </div>
-
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
                 <Field
+                  placeholder="Password"
                   name="password"
                   type="password"
                   className={
-                    "form-control" +
+                    "form-group form-control form-control-lg" +
                     (errors.password && touched.password ? " is-invalid" : "")
                   }
                 />
@@ -110,33 +114,22 @@ const Login = () => {
                   component="div"
                   className="invalid-feedback"
                 />
-              </div>
-
-              <div className="form-group">
                 <button
                   type="submit"
-                  className="btn btn-primary btn-block"
+                  className="form-group btn btn-lg btn-primary pull-xs-right"
                   disabled={loading}
                 >
                   {loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}
-                  <span>Login</span>
+                  <span>Sign in</span>
                 </button>
+                <SocialLogin />
               </div>
-            </Form>
-          )}
-        </Formik>
-        <a href="http://localhost:8080/oauth2/authorization/kakao?redirect_uri=http://localhost:3000/login">
-          Kakao Login
-        </a>
-        <a href="http://localhost:8080/oauth2/authorization/google?redirect_uri=http://localhost:3000/login">
-          Google Login
-        </a>
-        <a href="http://localhost:8080/oauth2/authorization/naver?redirect_uri=http://localhost:3000/login">
-          Naver Login
-        </a>
-      </div>
+            </div>
+          </Form>
+        )}
+      </Formik>
 
       {message && (
         <div className="form-group">
