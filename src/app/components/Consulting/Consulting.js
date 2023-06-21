@@ -1,28 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Consulting.css";
+import css from "./Consulting.module.css";
 
 const Consulting = (props) => {
   const { id, authorId, authorImage, authorName, createdAt, body, title } =
     props.consulting;
 
   return (
-    <div className="consulting-container">
+    <div className={css["consulting-container"]}>
       <div className="article-preview">
-        <div className="profile">
-          <div className="profile-box">
+        <div className={css["profile"]}>
+          <div className={css["profile-box"]}>
             <Link to={`/profile/${authorId}`}>
               <img
-                className="author-profile-img"
+                className={css["author-profile-img"]}
                 src={authorImage}
                 alt="강사 프로필 사진"
               />
             </Link>
-            <div className="author-box">
-              <Link className="author" to={`/profile/${authorId}`}>
+            <div className={css["author-box"]}>
+              <Link className={css["author"]} to={`/profile/${authorId}`}>
                 {authorName}
               </Link>
-              <div className="date">{createdAt}</div>
+              <div className={css["date"]}>{createdAt}</div>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LECTURE_DETAIL_DATA from "../../data/lectureDetailData";
 import { Link } from "react-router-dom";
-import "./ConsultingDetail.css";
+import css from "./ConsultingDetail.module.css";
 
 const ConsultingDetail = () => {
   const [data, setData] = useState([]);
@@ -15,15 +15,15 @@ const ConsultingDetail = () => {
       <div className="banner">
         <div className="container">
           <h1>{title}</h1>
-          <div className="profile-box detail">
+          <div className={css["profile-box"]}>
             <Link to={`/profile/${authorId}`}>
               <img
-                className="author-profile-img"
+                className={css["author-profile-img"]}
                 src={authorImage}
                 alt="강사 프로필 사진"
               />
             </Link>
-            <div className="author-box">
+            <div className={css["author-box"]}>
               <Link className="author" to={`/profile/${authorId}`}>
                 {authorName}
               </Link>

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Lecture.css";
+import css from "./Lecture.module.css";
 import { Link } from "react-router-dom";
 
 const Lecture = (props) => {
@@ -15,29 +15,29 @@ const Lecture = (props) => {
   } = props.lecture;
 
   return (
-    <div className="lecture-container">
+    <div className={css["lecture-container"]}>
       <div className="article-preview">
-        <div className="profile">
-          <div className="profile-box">
+        <div className={css["profile"]}>
+          <div className={css["profile-box"]}>
             <Link to={`/profile/${authorId}`}>
               <img
-                className="author-profile-img"
+                className={css["author-profile-img"]}
                 src={authorImage}
                 alt="강사 프로필 사진"
               />
             </Link>
-            <div className="author-box">
-              <Link className="author" to={`/profile/${authorId}`}>
+            <div className={css["author-box"]}>
+              <Link className={css["author"]} to={`/profile/${authorId}`}>
                 {authorName}
               </Link>
-              <div className="date">{createdAt}</div>
+              <div className={css["date"]}>{createdAt}</div>
             </div>
           </div>
 
-          <div className="info">
+          <div className={css["info"]}>
             <button className="btn btn-sm pull-xs-right">
               <i className="ion-heart"></i>
-              <span className="counter"> {favoritesCount} </span>
+              <span className={css["counter"]}> {favoritesCount} </span>
             </button>
           </div>
         </div>

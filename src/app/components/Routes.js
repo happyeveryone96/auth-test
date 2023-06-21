@@ -5,9 +5,9 @@ import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Home from "../pages/Home";
 import Settings from "../pages/Settings";
-import LectureDetail from "../pages/LectureDetail";
+import LectureDetail from "../pages/LectureDetail/LectureDetail";
 import ConsultingPage from "../pages/ConsultingPage";
-import ConsultingDetail from "../pages/ConsultingDetail/ConsultringDetail";
+import ConsultingDetail from "../pages/ConsultingDetail/ConsultingDetail";
 
 const MainRouter = () => {
   return (
