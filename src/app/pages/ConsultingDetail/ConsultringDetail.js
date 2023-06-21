@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import LECTURE_DETAIL_DATA from "../../data/lectureDetailData";
 import { Link } from "react-router-dom";
+import "./ConsultingDetail.css";
 
-const LectureDetail = () => {
+const ConsultingDetail = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
     setData(LECTURE_DETAIL_DATA);
@@ -14,7 +15,7 @@ const LectureDetail = () => {
       <div className="banner">
         <div className="container">
           <h1>{title}</h1>
-          <div className="profile-box">
+          <div className="profile-box detail">
             <Link to={`/profile/${authorId}`}>
               <img
                 className="author-profile-img"
@@ -43,4 +44,4 @@ const LectureDetail = () => {
   );
 };
 
-export default LectureDetail;
+export default ConsultingDetail;

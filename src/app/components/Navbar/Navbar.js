@@ -30,8 +30,13 @@ const Navbar = () => {
         <div>
           <div className="nav nav-pills outline-active">
             <li className="nav-item">
-              <Link to={"/home"} className="nav-link">
+              <Link to={"/"} className="nav-link">
                 Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/consulting"} className="nav-link">
+                Consulting
               </Link>
             </li>
             {isLoggedIn ? (

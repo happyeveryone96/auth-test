@@ -8,7 +8,7 @@ import qs from "query-string";
 import { login, socialLogin } from "../../slices/auth";
 import { clearMessage } from "../../slices/message";
 
-import SocialLogin from "../SocialLogin";
+import SocialLogin from "../../components/SocialLogin";
 
 import "./Login.css";
 
