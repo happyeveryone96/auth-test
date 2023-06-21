@@ -9,7 +9,7 @@ const Lecture = (props) => {
     authorImage,
     authorName,
     createdAt,
-    desc,
+    body,
     favoritesCount,
     title,
   } = props.lecture;
@@ -42,15 +42,12 @@ const Lecture = (props) => {
           </div>
         </div>
 
-        {/* <div className="article-preview">Loading articles...</div> */}
         <Link to={`/lecture/${id}`} className="preview-link">
           <h1>{title}</h1>
-          <p>{desc}</p>
+          <p>{body}</p>
           <span>Read more...</span>
         </Link>
       </div>
-
-      {/* <div className="article-preview">No articles are here... yet.</div> */}
     </div>
   );
 };
