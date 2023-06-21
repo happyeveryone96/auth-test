@@ -11,7 +11,6 @@ const Navbar = () => {
   const accessToken = localStorage.getItem("accessToken");
 
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
 
@@ -24,7 +23,7 @@ const Navbar = () => {
       <div className="nav-container">
         <div>
           <Link to={"/"} className="navbar-brand">
-            DataUs
+            GPTUs
           </Link>
         </div>
 
@@ -38,8 +37,8 @@ const Navbar = () => {
             {isLoggedIn ? (
               <>
                 <li className="nav-item">
-                  <Link to={"/profile"} className="nav-link ">
-                    {user.username || user.name}
+                  <Link to={"/settings"} className="nav-link ">
+                    settings
                   </Link>
                 </li>
                 <li className="nav-item">

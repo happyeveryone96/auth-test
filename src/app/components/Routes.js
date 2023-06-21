@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
 import Home from "./Home";
-import Profile from "./Profile";
+import Settings from "./Settings";
 
 const MainRouter = () => {
   return (
@@ -13,7 +13,7 @@ const MainRouter = () => {
       <Route path="/home" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      <Route path="/profile" element={<Profile />} />
+      <Route path="/settings" element={<Settings />} />
     </Routes>
   );
 };
