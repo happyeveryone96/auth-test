@@ -1,26 +1,40 @@
-# React Redux Toolkit 인증 실습
+# GPTUs 프로토타입
 
 ## 개요
 
-- 로그인/로그아웃, 회원가입 페이지
-- 유효성 검사
-- 사용자의 역할에 따라 navbar 항목 자동 변경
+- 로그인 / 회원가입 페이지
+  <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/c757d7b3-2563-4b06-b0a7-b322e19aa715" alt="로그인" width="500"/>
+  <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/a237cdf9-55f5-41b6-8a64-d941ac03458d" alt="회원가입" width="500"/>
+
+- 로그아웃
 
 <br>
 
-## 프로젝트 구조
+- 메인 페이지 (강의)
+  <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/fe46bb01-78c6-48df-81e4-b4900df6b750" alt="강의 페이지" width="500"/>
 
-![스크린샷 2023-06-08 오전 9 46 59](https://github.com/happyeveryone96/react-redux-toolkit-authentication-and-authorization-ex/assets/66675699/661e332e-1e4e-4971-804f-da41f0ab76cf)
+<br><br>
+
+- 강의 상세 페이지
+  <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/4ab40eb4-cc3b-423a-8a81-d9d79b5a6622" alt="강의 상세 페이지" width="500"/>
+
+<br><br>
+
+- 상담 페이지
+  <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/78729680-1622-4838-901b-df6e91dee58a" alt="상담 페이지" width="500"/>
+
+  <br><br>
+
+- 상담 상세 페이지
+  <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/361ce3f6-aedd-43ef-b667-40f6e92317e6" alt="상담 상세 페이지" width="500"/>
 
 <br>
 
 ## 프로젝트 실행 방법
 
-- 백엔드 서버가 구축되지 않아 애플리케이션이 정상적으로 동작하지 않는 상태
-
 ```
 npm run start
-Or: yarn start
+
 ```
 
 <br>
@@ -30,18 +44,27 @@ Or: yarn start
 ### 인증 서비스 (service/auth.service.js)
 
 - HTTP 요청을 위해 Axios를 사용하고 사용자 정보를 위해 Local Storage를 사용
-- login(): POST {사용자 이름, 비밀번호} & User Profile로컬 저장소에 저장
-- logout(): POST 로그아웃 요청, User Profile로컬 저장소에서 제거
-- register(): POST {사용자 이름, 이메일, 비밀번호}
-- getCurrentUser(): 저장된 사용자 정보 가져오기
+- login() : POST {사용자 이름, 비밀번호} & User Profile 로컬 저장소에 저장
+- logout() : POST 로그아웃 요청, User Profile 로컬 저장소에서 제거
+- register() : POST {사용자 이름, 이메일, 비밀번호}
+- refreshToken() : POST {토큰}, 토큰 재발급
 
 <br>
 
-### 데이터 서비스 (service/user.service.js)
+### 유저 서비스 (service/user.service.js)
 
-- 서버에서 데이터 검색
-- HttpOnly 쿠키는 HTTP 요청과 함께 자동으로 전송되므로 JWT를 신경쓰지 않고,<br>
-  Axios를 사용하기만 하면 됨
+- getUserProfile() : GET 사용자 정보 가져오기
+- editProfile() : PUT {토큰, 이메일, 비밀번호} 사용자 정보 수정 (이름, 비밀번호)
+
+<br>
+
+### 강의 및 상담 관련 데이터
+
+- dummy data 사용 (src/data)
+- lectureData.js
+- lectureDetailData.js
+- consultingData.js
+- consultingDetailData.js
 
 <br>
 
@@ -117,9 +140,3 @@ const validationSchema = Yup.object().shape({
     .required("This field is required!"), // password field가 비어있는지 검사
 });
 ```
-                                                                       
-<br>
-  
-### proxy 설정
-- 이 실습의 HttpOnly 쿠키 접근 방식은 React 앱과 백엔드 서버가 동일한 도메인에서 호스팅되는 경우에 작동함.<br> 
-따라서 로컬 개발에는 http-proxy-middleware를 사용해야 함
