@@ -1,45 +1,41 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import UserService from "../services/user.service";
+import Lecture from "./Lecture/Lecture";
+import LECTUREDATA from "../data/lectureData";
 
 const Home = () => {
   const accessToken = localStorage.getItem("accessToken");
-  const [user, setUser] = useState("");
   const userName = localStorage.getItem("username");
-  const { userId, email, username } = user;
-  const { isLoggedIn } = useSelector((state) => state.auth);
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setData(LECTUREDATA);
+  }, []);
 
   useEffect(() => {
     if (accessToken) {
-      UserService.getUserProfile(accessToken).then(
-        (response) => {
-          setUser(response.data);
-          const { username } = response.data;
-          if (!userName) {
-            localStorage.setItem("username", username);
-          }
-        },
-        (error) => {
-          const _content =
-            (error.response && error.response.data) ||
-            error.message ||
-            error.toString();
-          setUser(_content);
+      UserService.getUserProfile(accessToken).then((response) => {
+        const { username } = response.data;
+        if (!userName) {
+          localStorage.setItem("username", username);
         }
-      );
-    } else {
-      setUser("");
+      });
     }
   }, [userName, accessToken]);
 
   return (
-    <div className="container">
-      <header className="jumbotron">
-        <h2>Home</h2>
-        <h3>Id: {isLoggedIn && userId}</h3>
-        <h3>Email: {isLoggedIn && email}</h3>
-        <h3>Username: {isLoggedIn && username}</h3>
-      </header>
+    <div className="home-page">
+      <div className="banner">
+        <div className="container">
+          <h1 className="logo-font">GPTUs</h1>
+          <p>A place to share your knowledge.</p>
+        </div>
+      </div>
+
+      {data.map((lecture) => (
+        <Lecture key={lecture.id} lecture={lecture} />
+      ))}
     </div>
   );
 };

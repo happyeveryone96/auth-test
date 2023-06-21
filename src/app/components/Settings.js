@@ -8,7 +8,7 @@ import * as Yup from "yup";
 import { editProfile } from "../slices/auth";
 import { clearMessage } from "../slices/message";
 
-const Profile = () => {
+const Settings = () => {
   const accessToken = localStorage.getItem("accessToken");
   const userName = localStorage.getItem("username");
   const [user, setUser] = useState("");
@@ -18,6 +18,7 @@ const Profile = () => {
   useEffect(() => {
     UserService.getUserProfile(accessToken).then(
       (response) => {
+        console.log(response);
         setUser(response.data);
         const { username } = response.data;
         if (!userName) {
@@ -37,6 +38,8 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
 
   const { message } = useSelector((state) => state.message);
+  const test = useSelector((state) => state.auth);
+  console.log(test);
 
   const dispatch = useDispatch();
 
@@ -76,13 +79,8 @@ const Profile = () => {
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>
-          <strong>{username}</strong> Profile
-        </h3>
+        <h1>Your Settings</h1>
       </header>
-      <p>
-        <strong>userId:</strong> {userId}
-      </p>
       <p>
         <strong>email:</strong> {email}
       </p>
@@ -166,4 +164,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Settings;
