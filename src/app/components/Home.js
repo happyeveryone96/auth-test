@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import UserService from "../services/user.service";
 import Lecture from "./Lecture/Lecture";
-import LECTUREDATA from "../data/lectureData";
+import LECTURE_DATA from "../data/lectureData";
 
 const Home = () => {
   const accessToken = localStorage.getItem("accessToken");
@@ -10,7 +9,7 @@ const Home = () => {
 
   const [data, setData] = useState([]);
   useEffect(() => {
-    setData(LECTUREDATA);
+    setData(LECTURE_DATA);
   }, []);
 
   useEffect(() => {

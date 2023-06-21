@@ -48,7 +48,6 @@ export const login = createAsyncThunk(
 export const socialLogin = createAsyncThunk(
   "auth/socailLogin",
   async (accessToken, thunkAPI) => {
-    console.log(accessToken);
     try {
       const data = await UserService.getUserProfile(accessToken);
       return { user: data.data };
@@ -130,7 +129,6 @@ export const getUserInfo = createAsyncThunk(
   async ({ accessToken }, thunkAPI) => {
     try {
       const data = await UserService.getUserProfile(accessToken);
-      console.log(data);
       return { user: data };
     } catch (error) {
       const message =

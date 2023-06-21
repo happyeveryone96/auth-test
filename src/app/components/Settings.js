@@ -13,12 +13,11 @@ const Settings = () => {
   const userName = localStorage.getItem("username");
   const [user, setUser] = useState("");
 
-  const { userId, email, username } = user;
+  const { email, username } = user;
 
   useEffect(() => {
     UserService.getUserProfile(accessToken).then(
       (response) => {
-        console.log(response);
         setUser(response.data);
         const { username } = response.data;
         if (!userName) {
@@ -33,13 +32,11 @@ const Settings = () => {
         setUser(_content);
       }
     );
-  }, []);
+  }, [accessToken, userName]);
 
   const [loading, setLoading] = useState(false);
 
   const { message } = useSelector((state) => state.message);
-  const test = useSelector((state) => state.auth);
-  console.log(test);
 
   const dispatch = useDispatch();
 
