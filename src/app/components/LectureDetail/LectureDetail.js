@@ -10,9 +10,9 @@ const LectureDetail = () => {
   const { authorId, authorImage, title, desc, authorName, createdAt } = data;
 
   return (
-    <div class="article-page">
-      <div class="banner">
-        <div class="container">
+    <div className="article-page">
+      <div className="banner">
+        <div className="container">
           <h1>{title}</h1>
           <div className="profile-box">
             <Link to={`/profile/${authorId}`}>
@@ -31,9 +31,9 @@ const LectureDetail = () => {
           </div>
         </div>
       </div>
-      <div class="container page">
-        <div class="row article-content">
-          <div class="col-xs-12">
+      <div className="container page">
+        <div className="row article-content">
+          <div className="col-xs-12">
             <div>{desc}</div>
           </div>
         </div>
