@@ -2,7 +2,7 @@
 
 ## 개요
 
-- 로그인 / 회원가입 페이지
+- 로그인 / 회원가입 페이지<br>
   <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/c757d7b3-2563-4b06-b0a7-b322e19aa715" alt="로그인" width="500"/>
   <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/a237cdf9-55f5-41b6-8a64-d941ac03458d" alt="회원가입" width="500"/>
 
@@ -10,22 +10,22 @@
 
 <br>
 
-- 메인 페이지 (강의)
+- 메인 페이지 (강의)<br>
   <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/fe46bb01-78c6-48df-81e4-b4900df6b750" alt="강의 페이지" width="500"/>
 
 <br><br>
 
-- 강의 상세 페이지
+- 강의 상세 페이지<br>
   <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/4ab40eb4-cc3b-423a-8a81-d9d79b5a6622" alt="강의 상세 페이지" width="500"/>
 
 <br><br>
 
-- 상담 페이지
+- 상담 페이지<br>
   <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/78729680-1622-4838-901b-df6e91dee58a" alt="상담 페이지" width="500"/>
 
   <br><br>
 
-- 상담 상세 페이지
+- 상담 상세 페이지<br>
   <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/361ce3f6-aedd-43ef-b667-40f6e92317e6" alt="상담 상세 페이지" width="500"/>
 
 <br>
