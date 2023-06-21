@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import UserService from "../services/user.service";
-import Lecture from "./Lecture/Lecture";
+import Lecture from "../components/Lecture/Lecture";
 import LECTURE_DATA from "../data/lectureData";
 
 const Home = () => {
