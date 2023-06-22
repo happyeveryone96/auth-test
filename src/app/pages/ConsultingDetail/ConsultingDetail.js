@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import LECTURE_DETAIL_DATA from "app/data/lectureDetailData";
 import { Link } from "react-router-dom";
+import LECTURE_DETAIL_DATA from "app/data/lectureDetailData";
 import css from "app/pages/ConsultingDetail/ConsultingDetail.module.css";
 
 const ConsultingDetail = () => {

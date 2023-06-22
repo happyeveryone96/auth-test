@@ -10,7 +10,7 @@ import { clearMessage } from "app/slices/message";
 
 import SocialLogin from "app/components/SocialLogin";
 
-import "./Login.css";
+import "app/pages/Login/Login.css";
 
 const Login = () => {
   const accessToken = localStorage.getItem("accessToken");

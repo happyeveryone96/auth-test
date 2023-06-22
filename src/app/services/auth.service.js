@@ -1,4 +1,4 @@
-import { instance } from "../instance/axios.instance";
+import { instance } from "app/instance/axios.instance";
 import axios from "axios";
 
 const register = (username, email, password) => {
