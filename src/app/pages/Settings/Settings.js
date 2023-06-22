@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
-import UserService from "../../services/user.service";
+import UserService from "app/services/user.service";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import { editProfile } from "../../slices/auth";
-import { clearMessage } from "../../slices/message";
+import { editProfile } from "app/slices/auth";
+import { clearMessage } from "app/slices/message";
 
-import "./Settings.css";
+import "app/pages/Settings/Settings.css";
 
 const Settings = () => {
   const accessToken = localStorage.getItem("accessToken");

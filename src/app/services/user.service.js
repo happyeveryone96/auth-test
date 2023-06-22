@@ -1,4 +1,4 @@
-import { instance } from "../instance/axios.instance";
+import { instance } from "app/instance/axios.instance";
 
 const getUserProfile = (accessToken) => {
   return instance.get("user", {
