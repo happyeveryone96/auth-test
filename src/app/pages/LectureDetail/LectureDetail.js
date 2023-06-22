@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import LECTURE_DETAIL_DATA from "../../data/lectureDetailData";
+import LECTURE_DETAIL_DATA from "app/data/lectureDetailData";
 import { Link } from "react-router-dom";
-import css from "./LectureDetail.module.css";
+import css from "app/pages/LectureDetail/LectureDetail.module.css";
 
 const LectureDetail = () => {
   const [data, setData] = useState([]);

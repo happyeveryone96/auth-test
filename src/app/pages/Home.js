@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import UserService from "../services/user.service";
-import Lecture from "../components/Lecture/Lecture";
-import LECTURE_DATA from "../data/lectureData";
+import UserService from "app/services/user.service";
+import Lecture from "app/components/Lecture/Lecture";
+import LECTURE_DATA from "app/data/lectureData";
 import { useSelector } from "react-redux";
 
 const Home = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import css from "./Mentor.module.css";
+import css from "app/components/Mentor/Mentor.module.css";
 
 const Mentor = (props) => {
   const { id, authorId, authorImage, authorName, createdAt, body, title } =

@@ -2,9 +2,9 @@ import React, { useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import "./Navbar.css";
+import "app/components/Navbar/Navbar.css";
 
-import { logout } from "../../slices/auth";
+import { logout } from "app/slices/auth";
 
 const Navbar = () => {
   const refreshToken = localStorage.getItem("refreshToken");
