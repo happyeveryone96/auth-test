@@ -1,5 +1,5 @@
 import React from "react";
-import css from "./Lecture.module.css";
+import css from "app/components/Lecture/Lecture.module.css";
 import { Link } from "react-router-dom";
 
 const Lecture = (props) => {

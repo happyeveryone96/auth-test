@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import css from "./MentorDetail.module.css";
-import MENTOR_DETAIL_DATA from "../../data/mentorDetailData";
+import css from "app/pages/MentorDetail/MentorDetail.module.css";
+import MENTOR_DETAIL_DATA from "app/data/mentorDetailData";
 
 const MentorDetail = () => {
   const [data, setData] = useState([]);

@@ -5,10 +5,10 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import qs from "query-string";
 
-import { login, socialLogin } from "../../slices/auth";
-import { clearMessage } from "../../slices/message";
+import { login, socialLogin } from "app/slices/auth";
+import { clearMessage } from "app/slices/message";
 
-import SocialLogin from "../../components/SocialLogin";
+import SocialLogin from "app/components/SocialLogin";
 
 import "./Login.css";
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Mentor from "../components/Mentor/Mentor";
-import MENTOR_DATA from "../data/mentorData";
+import Mentor from "app/components/Mentor/Mentor";
+import MENTOR_DATA from "app/data/mentorData";
 
 const MentorPage = () => {
   const [data, setData] = useState([]);

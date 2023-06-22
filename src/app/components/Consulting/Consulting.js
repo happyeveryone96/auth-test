@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import css from "./Consulting.module.css";
+import css from "app/components/Consulting/Consulting.module.css";
 
 const Consulting = (props) => {
   const { id, authorId, authorImage, authorName, createdAt, body, title } =

@@ -1,15 +1,15 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Login from "../pages/Login/Login";
-import Register from "../pages/Register/Register";
-import Home from "../pages/Home";
-import Settings from "../pages/Settings/Settings";
-import LectureDetail from "../pages/LectureDetail/LectureDetail";
-import ConsultingPage from "../pages/ConsultingPage";
-import ConsultingDetail from "../pages/ConsultingDetail/ConsultingDetail";
-import MentorPage from "../pages/MentorPage";
-import MentorDetail from "../pages/MentorDetail/MentorDetail";
+import Login from "app/pages/Login/Login";
+import Register from "app/pages/Register/Register";
+import Home from "app/pages/Home";
+import Settings from "app/pages/Settings/Settings";
+import LectureDetail from "app/pages/LectureDetail/LectureDetail";
+import ConsultingPage from "app/pages/ConsultingPage";
+import ConsultingDetail from "app/pages/ConsultingDetail/ConsultingDetail";
+import MentorPage from "app/pages/MentorPage";
+import MentorDetail from "app/pages/MentorDetail/MentorDetail";
 
 const MainRouter = () => {
   return (

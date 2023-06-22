@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Consulting from "../components/Consulting/Consulting";
-import CONSULTING_DATA from "../data/consultingData";
+import Consulting from "app/components/Consulting/Consulting";
+import CONSULTING_DATA from "app/data/consultingData";
 
 const ConsultingPage = () => {
   const [data, setData] = useState([]);
