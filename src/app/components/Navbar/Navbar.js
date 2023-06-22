@@ -39,6 +39,11 @@ const Navbar = () => {
                 Consulting
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to={"/mentor"} className="nav-link">
+                Mentor
+              </Link>
+            </li>
             {isLoggedIn ? (
               <>
                 <li className="nav-item">

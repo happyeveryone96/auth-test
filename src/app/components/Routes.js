@@ -8,12 +8,16 @@ import Settings from "../pages/Settings";
 import LectureDetail from "../pages/LectureDetail/LectureDetail";
 import ConsultingPage from "../pages/ConsultingPage";
 import ConsultingDetail from "../pages/ConsultingDetail/ConsultingDetail";
+import MentorPage from "../pages/MentorPage";
+import MentorDetail from "../pages/MentorDetail/MentorDetail";
 
 const MainRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/consulting" element={<ConsultingPage />} />
+      <Route path="/mentor" element={<MentorPage />} />
+      <Route path="/mentor/:id" element={<MentorDetail />} />
       <Route path="/consulting/:id" element={<ConsultingDetail />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
