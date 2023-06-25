@@ -18,8 +18,3 @@
   height: 226px;
   min-height: 50px;
 }
-
-.invalid-feedback {
-  position: relative;
-  top: 3px;
-}

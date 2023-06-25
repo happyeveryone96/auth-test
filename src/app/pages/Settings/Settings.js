@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import UserService from "app/services/user.service";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
+
+import FormField from "app/components/FormField/FormField";
 
 import { editProfile } from "app/slices/auth";
 import { clearMessage } from "app/slices/message";
@@ -75,103 +77,46 @@ const Settings = () => {
               {({ errors, touched }) => (
                 <Form>
                   <div className="form-group">
-                    <Field
-                      name="profileImg"
-                      type="text"
+                    <FormField
                       placeholder="Profile Image"
-                      disabled
-                      className={
-                        "form-control" +
-                        (errors.profileImg && touched.profileImg
-                          ? " is-invalid"
-                          : "")
-                      }
-                    />
-                    <ErrorMessage
                       name="profileImg"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <Field
-                      name="username"
                       type="text"
+                      errors={errors}
+                      touched={touched}
+                      disabled
+                    />
+
+                    <FormField
                       placeholder="Username"
-                      className={
-                        "form-control" +
-                        (errors.username && touched.username
-                          ? " is-invalid"
-                          : "")
-                      }
-                    />
-                    <ErrorMessage
                       name="username"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <Field
-                      name="shortBio"
-                      as="textarea"
                       type="text"
-                      disabled
+                      errors={errors}
+                      touched={touched}
+                    />
+                    <FormField
                       placeholder="Short bio about you"
-                      className={
-                        "form-control" +
-                        (errors.shortBio && touched.shortBio
-                          ? " is-invalid"
-                          : "")
-                      }
-                    />
-                    <ErrorMessage
                       name="shortBio"
-                      component="div"
-                      className="invalid-feedback"
+                      type="text"
+                      errors={errors}
+                      touched={touched}
+                      disabled
+                      as="textarea"
                     />
-                  </div>
-
-                  <div className="form-group">
-                    <Field
+                    <FormField
+                      placeholder="Email"
                       name="email"
                       type="text"
-                      placeholder="Email"
+                      errors={errors}
+                      touched={touched}
                       disabled
-                      className={
-                        "form-control" +
-                        (errors.email && touched.email ? " is-invalid" : "")
-                      }
                     />
-                    <ErrorMessage
-                      name="email"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-
-                  <div className="form-group">
-                    <Field
+                    <FormField
+                      placeholder="Password"
                       name="password"
                       type="password"
-                      placeholder="Password"
-                      className={
-                        "form-control" +
-                        (errors.password && touched.password
-                          ? " is-invalid"
-                          : "")
-                      }
+                      errors={errors}
+                      touched={touched}
                     />
-                    <ErrorMessage
-                      name="password"
-                      component="div"
-                      className="invalid-feedback"
-                    />
-                  </div>
-
-                  <div className="form-group">
                     <button
                       type="submit"
                       className="btn btn-primary btn-block"
