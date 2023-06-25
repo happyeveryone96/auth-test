@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, useLocation, Link } from "react-router-dom";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import qs from "query-string";
+import FormField from "../../components/FormField/FormField";
 
 import { login, socialLogin } from "app/slices/auth";
 import { clearMessage } from "app/slices/message";
@@ -86,33 +87,19 @@ const Login = () => {
                 <p className="text-xs-center">
                   <Link to="/register">Need an account?</Link>
                 </p>
-                <Field
+                <FormField
                   placeholder="Email"
                   name="email"
                   type="text"
-                  className={
-                    "form-group form-control form-control-lg" +
-                    (errors.email && touched.email ? " is-invalid" : "")
-                  }
+                  errors={errors}
+                  touched={touched}
                 />
-                <ErrorMessage
-                  name="email"
-                  component="div"
-                  className="invalid-feedback"
-                />
-                <Field
+                <FormField
                   placeholder="Password"
                   name="password"
                   type="password"
-                  className={
-                    "form-group form-control form-control-lg" +
-                    (errors.password && touched.password ? " is-invalid" : "")
-                  }
-                />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className="invalid-feedback"
+                  errors={errors}
+                  touched={touched}
                 />
                 <button
                   type="submit"

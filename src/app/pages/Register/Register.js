@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
 import { register } from "app/slices/auth";
 import { clearMessage } from "app/slices/message";
+
+import FormField from "app/components/FormField/FormField.js";
 
 import "app/pages/Register/Register.css";
 
@@ -76,47 +78,26 @@ const Register = () => {
                 <p className="text-xs-center">
                   <Link to="/login">Have an account?</Link>
                 </p>
-                <Field
+                <FormField
                   placeholder="Username"
                   name="username"
                   type="text"
-                  className={
-                    "form-group form-control form-control-lg" +
-                    (errors.username && touched.username ? " is-invalid" : "")
-                  }
+                  errors={errors}
+                  touched={touched}
                 />
-                <ErrorMessage
-                  name="username"
-                  component="div"
-                  className="invalid-feedback"
-                />
-                <Field
+                <FormField
                   placeholder="Email"
                   name="email"
                   type="text"
-                  className={
-                    "form-group form-control form-control-lg" +
-                    (errors.email && touched.email ? " is-invalid" : "")
-                  }
+                  errors={errors}
+                  touched={touched}
                 />
-                <ErrorMessage
-                  name="email"
-                  component="div"
-                  className="invalid-feedback"
-                />
-                <Field
+                <FormField
                   placeholder="Password"
                   name="password"
                   type="password"
-                  className={
-                    "form-group form-control form-control-lg" +
-                    (errors.password && touched.password ? " is-invalid" : "")
-                  }
-                />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className="invalid-feedback"
+                  errors={errors}
+                  touched={touched}
                 />
                 <div className="form-group">
                   <button
