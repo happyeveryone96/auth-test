@@ -93,6 +93,7 @@ export const logout = createAsyncThunk(
     try {
       await AuthService.logout(refreshToken, accessToken);
     } catch (error) {
+      console.log(error);
       const message =
         (error.response &&
           error.response.data &&
@@ -180,6 +181,10 @@ const authSlice = createSlice({
     [logout.fulfilled]: (state) => {
       state.isLoggedIn = false;
       state.user = null;
+    },
+    [logout.rejected]: (state) => {
+      state.isLoggedIn = true;
+      state.user = [...state.user];
     },
     [reset.fulfilled]: (state) => {
       state.isLoggedIn = false;

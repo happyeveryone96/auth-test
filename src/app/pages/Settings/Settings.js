@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { reset } from "app/slices/auth";
+import { useNavigate } from "react-router-dom";
 
 import FormField from "app/components/FormField/FormField";
 
@@ -14,18 +16,32 @@ import "app/pages/Settings/Settings.css";
 
 const Settings = () => {
   const accessToken = localStorage.getItem("accessToken");
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    UserService.getUserProfile(accessToken);
-  }, [accessToken]);
+    if (accessToken && isLoggedIn) {
+      UserService.getUserProfile(accessToken)
+      .catch(() => {
+        window.location.reload();
+      });
+    }
+  }, [isLoggedIn, accessToken]);
 
   const [loading, setLoading] = useState(false);
 
   const { message } = useSelector((state) => state.message);
   const { user } = useSelector((state) => state.auth);
-  const { email, username, name } = user;
+  const email = user?.email;
+  const username = user?.username;
+  const name = user?.name;
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isLoggedIn && !accessToken) {
+      dispatch(reset());
+    }
+  }, [dispatch, isLoggedIn, accessToken]);
 
   useEffect(() => {
     dispatch(clearMessage());
@@ -59,7 +75,7 @@ const Settings = () => {
       });
   };
 
-  if (!accessToken) {
+  if (!isLoggedIn && !accessToken) {
     return <Navigate to="/login" />;
   }
 

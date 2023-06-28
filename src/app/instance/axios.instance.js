@@ -22,7 +22,6 @@ instance.interceptors.response.use(
       localStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("username");
-      window.location.reload();
     }
     return Promise.reject(error);
   }
