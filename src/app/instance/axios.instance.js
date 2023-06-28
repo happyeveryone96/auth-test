@@ -12,13 +12,18 @@ instance.interceptors.request.use(function (config) {
   return config;
 });
 
-instance.interceptors.response.use(function (error) {
-  if (error.response.status === 401) {
-    alert("인증 토큰이 만료되었습니다.");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("username");
-    window.location.reload();
+instance.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    if (error.response.status === 401) {
+      alert("인증 토큰이 만료되었습니다.");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("username");
+      window.location.reload();
+    }
+    return Promise.reject(error);
   }
-  return Promise.reject(error);
-});
+);
