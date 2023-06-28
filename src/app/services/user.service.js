@@ -1,11 +1,22 @@
 import { instance } from "app/instance/axios.instance";
 
 const getUserProfile = (accessToken) => {
-  return instance.get("user", {
-    headers: {
-      Authorization: accessToken ? `Bearer ${accessToken}` : accessToken,
-    },
-  });
+  return instance
+    .get("user", {
+      headers: {
+        Authorization: accessToken ? `Bearer ${accessToken}` : accessToken,
+      },
+    })
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      if (error.response.status === 401) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("username");
+      }
+    });
 };
 
 const editProfile = (username, password, accessToken) => {

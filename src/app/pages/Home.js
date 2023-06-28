@@ -16,13 +16,19 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      UserService.getUserProfile(accessToken).then((response) => {
-        const { username } = response.data;
-        if (!userName) {
-          localStorage.setItem("username", username);
-        }
-      });
+    if (accessToken && isLoggedIn) {
+      UserService.getUserProfile(accessToken)
+        .then((response) => {
+          if (response.status === 200) {
+            const { username } = response.data;
+            if (!userName) {
+              localStorage.setItem("username", username);
+            }
+          }
+        })
+        .catch((error) => {
+          return error;
+        });
     }
   }, [userName, accessToken, isLoggedIn]);
 

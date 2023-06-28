@@ -1,6 +1,7 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { reset } from "app/slices/auth";
 
 import "app/components/Navbar/Navbar.css";
 
@@ -17,6 +18,12 @@ const Navbar = () => {
   const logOut = useCallback(() => {
     dispatch(logout({ refreshToken, accessToken }));
   }, [dispatch, refreshToken, accessToken]);
+
+  useEffect(() => {
+    if (isLoggedIn && !accessToken) {
+      dispatch(reset());
+    }
+  }, [dispatch, isLoggedIn, accessToken]);
 
   return (
     <nav className="navbar navbar-expand navbar-white">

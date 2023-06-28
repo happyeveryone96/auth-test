@@ -143,6 +143,10 @@ export const getUserInfo = createAsyncThunk(
   }
 );
 
+export const reset = createAsyncThunk("auth/reset", async () => {
+  return { isLoggedIn: false, user: null };
+});
+
 const initialState = user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user: null };
@@ -174,6 +178,10 @@ const authSlice = createSlice({
       state.user = null;
     },
     [logout.fulfilled]: (state) => {
+      state.isLoggedIn = false;
+      state.user = null;
+    },
+    [reset.fulfilled]: (state) => {
       state.isLoggedIn = false;
       state.user = null;
     },
