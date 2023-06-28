@@ -57,9 +57,11 @@ const reissuanceToken = (refreshToken) => {
       refreshToken,
     })
     .then((response) => {
-      console.log(response);
+      return response;
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      return err;
+    });
 };
 
 const AuthService = {
