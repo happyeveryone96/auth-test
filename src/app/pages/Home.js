@@ -26,8 +26,8 @@ const Home = () => {
             }
           }
         })
-        .catch((error) => {
-          return error;
+        .catch(() => {
+          window.location.reload();
         });
     }
   }, [userName, accessToken, isLoggedIn]);
