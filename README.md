@@ -31,7 +31,7 @@
   <br><br>
 
 - 설정 페이지<br>
-  - 사용자명, 비밀번호 수정 기능
+  - 사용자명, 비밀번호 수정 기능<br>
     <img src="https://github.com/happyeveryone96/gptus-prototype/assets/66675699/df334fa3-acff-4f5c-8916-7a43fbe12c74" alt="설정 페이지" width="500"/>
 
 <br>
