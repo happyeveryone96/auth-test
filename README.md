@@ -3,30 +3,36 @@
 ## 개요
 
 - 로그인 / 회원가입 페이지<br>
-  <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/c757d7b3-2563-4b06-b0a7-b322e19aa715" alt="로그인" width="500"/>
-  <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/a237cdf9-55f5-41b6-8a64-d941ac03458d" alt="회원가입" width="500"/>
+  <img src="https://github.com/happyeveryone96/gptus-prototype/assets/66675699/f7ab3287-a7ae-4585-954b-4c7ec8de4bb6" alt="로그인" width="500"/>
+  <img src="https://github.com/happyeveryone96/gptus-prototype/assets/66675699/36189f2b-9796-4062-8cd9-409e77868e86" alt="회원가입" width="500"/>
 
 - 로그아웃
 
 <br>
 
 - 메인 페이지 (강의)<br>
-  <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/fe46bb01-78c6-48df-81e4-b4900df6b750" alt="강의 페이지" width="500"/>
+  <img src="https://github.com/happyeveryone96/gptus-prototype/assets/66675699/7d33d0b2-64c9-49b6-89f4-29eb8b0702df" alt="강의 페이지" width="500"/>
 
 <br><br>
 
 - 강의 상세 페이지<br>
-  <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/4ab40eb4-cc3b-423a-8a81-d9d79b5a6622" alt="강의 상세 페이지" width="500"/>
+  <img src="https://github.com/happyeveryone96/gptus-prototype/assets/66675699/cc465ecc-a16b-45e3-8efc-d07fb9b42d6c" alt="강의 상세 페이지" width="500"/>
 
 <br><br>
 
 - 상담 페이지<br>
-  <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/78729680-1622-4838-901b-df6e91dee58a" alt="상담 페이지" width="500"/>
+  <img src="https://github.com/happyeveryone96/gptus-prototype/assets/66675699/71c8a20a-424e-4f1b-905d-de17f974a164" alt="상담 페이지" width="500"/>
 
   <br><br>
 
 - 상담 상세 페이지<br>
-  <img src="https://github.com/happyeveryone96/jinwoo-portfolio/assets/66675699/361ce3f6-aedd-43ef-b667-40f6e92317e6" alt="상담 상세 페이지" width="500"/>
+  <img src="https://github.com/happyeveryone96/gptus-prototype/assets/66675699/7e7d371a-27b5-4a67-bb37-98335ae55aa0" alt="상담 상세 페이지" width="500"/>
+
+  <br><br>
+
+- 설정 페이지<br>
+  - 사용자명, 비밀번호 수정 기능
+    <img src="https://github.com/happyeveryone96/gptus-prototype/assets/66675699/df334fa3-acff-4f5c-8916-7a43fbe12c74" alt="설정 페이지" width="500"/>
 
 <br>
 
@@ -56,6 +62,12 @@ npm run start
 
 - getUserProfile() : GET 사용자 정보 가져오기
 - editProfile() : PUT {토큰, 이메일, 비밀번호} 사용자 정보 수정 (이름, 비밀번호)
+
+<br>
+
+### 전역 상태 유지 (redux-persist)
+
+- 새로고침 시 전역 상태가 초기화되는 것을 막아줌
 
 <br>
 
@@ -112,11 +124,82 @@ root.render(
 ```
 
 <br>
-  
-### Formik과 Yup을 활용한 유효성 검사 
+
+### persist store 적용
+
+```
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "app/slices/auth";
+import messageReducer from "app/slices/message";
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
+import { combineReducers } from "@reduxjs/toolkit";
+
+const reducers = combineReducers({
+  auth: authReducer,
+  message: messageReducer,
+});
+
+const persistConfig = {
+  key: "root",
+  storage,
+  // localStorage에 저장
+  whitelist: ["auth"],
+  // auth, message 2개의 reducer 중에 auth reducer만 localStorage에 저장
+};
+
+const persistedReducer = persistReducer(persistConfig, reducers);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ serializableCheck: false }),
+  devTools: true,
+});
+
+```
+
+<br>
+
+### persist store 사용
+
+```
+import React from "react";
+import { createRoot } from "react-dom/client";
+import { Provider } from "react-redux";
+import { store } from "app/store";
+import App from "App";
+import "index.css";
+
+// persist store 사용을 위해 필요한 코드
+import { PersistGate } from "redux-persist/integration/react";
+import { persistStore } from "redux-persist";
+
+const container = document.getElementById("root");
+const root = createRoot(container);
+
+// persist store 사용을 위해 필요한 코드햣
+const persistor = persistStore(store);
+
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>
+);
+
+```
+
+<br>
+
+### Formik과 Yup을 활용한 유효성 검사
+
 - Formik은 동기식 및 비동기식 양식 수준 및 필드 수준 유효성 검사를 지원<br>
 - Yup은 통해 스키마 기반 양식 수준 유효성 검사를 지원
-  
+
 ```
 // components/Register.js
 const validationSchema = Yup.object().shape({
