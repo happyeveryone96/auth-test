@@ -65,7 +65,8 @@ const Login = () => {
       .then(() => {
         navigate("/");
         setLoading(false);
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   if (isLogin) {

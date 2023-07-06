@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
@@ -15,8 +15,6 @@ const Register = () => {
   const { message } = useSelector((state) => state.message);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     dispatch(clearMessage());
@@ -53,14 +51,12 @@ const Register = () => {
   const handleRegister = (formValue) => {
     const { username, email, password } = formValue;
 
-    setLoading(true);
-
     dispatch(register({ username, email, password }))
       .unwrap()
       .then(() => {
         navigate("/login");
-        setLoading(false);
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -103,7 +99,6 @@ const Register = () => {
                   <button
                     type="submit"
                     className="btn btn-lg btn-primary pull-xs-right"
-                    disabled={loading}
                   >
                     <span>Sign up</span>
                   </button>
