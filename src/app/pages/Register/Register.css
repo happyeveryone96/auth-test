@@ -1,3 +1,9 @@
+.form-group .alert {
+  width: 50vw;
+  position: relative;
+  left: 15px;
+}
+
 .register-container {
   max-width: 1200px;
   margin: 0 auto;
