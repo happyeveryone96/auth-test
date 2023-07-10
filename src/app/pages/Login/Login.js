@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate, useLocation, Link } from "react-router-dom";
 import { Formik, Form } from "formik";
@@ -9,7 +9,7 @@ import FormField from "../../components/FormField/FormField";
 import { login, socialLogin } from "app/slices/auth";
 import { clearMessage } from "app/slices/message";
 
-import SocialLogin from "app/components/SocialLogin";
+import SocialLogin from "app/components/SocialLogin/SocialLogin";
 
 import "app/pages/Login/Login.css";
 
