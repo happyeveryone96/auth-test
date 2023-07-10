@@ -25,8 +25,6 @@ const Login = () => {
     refreshToken: refreshTokenFromSocialLogin,
   } = query;
 
-  const [loading, setLoading] = useState(false);
-
   const { message } = useSelector((state) => state.message);
 
   const dispatch = useDispatch();
@@ -58,13 +56,10 @@ const Login = () => {
   const handleLogin = (formValue) => {
     const { email, password } = formValue;
 
-    setLoading(true);
-
     dispatch(login({ email, password }))
       .unwrap()
       .then(() => {
         navigate("/");
-        setLoading(false);
       })
       .catch((err) => console.log(err));
   };
@@ -105,11 +100,7 @@ const Login = () => {
                 <button
                   type="submit"
                   className="form-group btn btn-lg btn-primary pull-xs-right"
-                  disabled={loading}
                 >
-                  {loading && (
-                    <span className="spinner-border spinner-border-sm"></span>
-                  )}
                   <span>Sign in</span>
                 </button>
                 <SocialLogin />
