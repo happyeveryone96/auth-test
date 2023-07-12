@@ -1,6 +1,6 @@
 import { instance } from "app/instance/axios.instance";
 
-const getUserProfile = (accessToken) => {
+const getUserProfile = (accessToken: string) => {
   return instance
     .get("user", {
       headers: {
@@ -12,7 +12,11 @@ const getUserProfile = (accessToken) => {
     });
 };
 
-const editProfile = (username, password, accessToken) => {
+const editProfile = (
+  username: string,
+  password: string,
+  accessToken: string
+) => {
   return instance
     .put(
       "user",

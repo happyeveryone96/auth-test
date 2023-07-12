@@ -4,16 +4,48 @@ import { setMessage } from "app/slices/message";
 import AuthService from "app/services/auth.service";
 import UserService from "app/services/user.service";
 
-const user = JSON.parse(localStorage.getItem("user"));
+interface RegisterType {
+  username: string;
+  email: string;
+  password: string;
+}
 
-export const register = createAsyncThunk(
+interface LoginType {
+  email: string;
+  password: string;
+}
+
+interface EditProfileType {
+  username: string;
+  password: string;
+  accessToken: string;
+}
+
+interface LogoutType {
+  accessToken: string;
+  refreshToken: string;
+}
+
+interface ReissuanceTokenType {
+  refreshToken: string;
+}
+
+interface GetUserInfoType {
+  accessToken: string;
+}
+
+const userString = localStorage.getItem("user");
+const user = JSON.parse(userString || "null");
+
+export const register = createAsyncThunk<any, RegisterType>(
   "auth/register",
   async ({ username, email, password }, thunkAPI) => {
     try {
       const response = await AuthService.register(username, email, password);
       thunkAPI.dispatch(setMessage(response.data.message));
+      thunkAPI.dispatch(registerFulfilled());
       return response.data;
-    } catch (error) {
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&
@@ -21,18 +53,20 @@ export const register = createAsyncThunk(
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));
-      return thunkAPI.rejectWithValue();
+      thunkAPI.dispatch(registerRejected());
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-export const login = createAsyncThunk(
+export const login = createAsyncThunk<any, LoginType>(
   "auth/login",
   async ({ email, password }, thunkAPI) => {
     try {
       const data = await AuthService.login(email, password);
+      thunkAPI.dispatch(loginFulfilled(data));
       return { user: data };
-    } catch (error) {
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&
@@ -40,18 +74,20 @@ export const login = createAsyncThunk(
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));
-      return thunkAPI.rejectWithValue();
+      thunkAPI.dispatch(loginRejected());
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-export const socialLogin = createAsyncThunk(
+export const socialLogin = createAsyncThunk<any, any>(
   "auth/socailLogin",
   async (accessToken, thunkAPI) => {
     try {
       const data = await UserService.getUserProfile(accessToken);
+      thunkAPI.dispatch(socialLoginFulfilled(data.data));
       return { user: data.data };
-    } catch (error) {
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&
@@ -59,12 +95,13 @@ export const socialLogin = createAsyncThunk(
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));
-      return thunkAPI.rejectWithValue();
+      thunkAPI.dispatch(socialLoginRejected());
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-export const editProfile = createAsyncThunk(
+export const editProfile = createAsyncThunk<any, EditProfileType>(
   "auth/edit",
   async ({ username, password, accessToken }, thunkAPI) => {
     try {
@@ -74,7 +111,7 @@ export const editProfile = createAsyncThunk(
         accessToken
       );
       return { data };
-    } catch (error) {
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&
@@ -82,18 +119,18 @@ export const editProfile = createAsyncThunk(
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));
-      return thunkAPI.rejectWithValue();
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-export const logout = createAsyncThunk(
+export const logout = createAsyncThunk<any, LogoutType>(
   "auth/logout",
   async ({ refreshToken, accessToken }, thunkAPI) => {
     try {
       await AuthService.logout(refreshToken, accessToken);
-    } catch (error) {
-      console.log(error);
+      thunkAPI.dispatch(logoutFulfilled());
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&
@@ -101,18 +138,19 @@ export const logout = createAsyncThunk(
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));
-      return thunkAPI.rejectWithValue();
+      thunkAPI.dispatch(logoutRejected());
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-export const reissuanceToken = createAsyncThunk(
+export const reissuanceToken = createAsyncThunk<any, ReissuanceTokenType>(
   "auth/reissuance",
   async ({ refreshToken }, thunkAPI) => {
     try {
       const data = await AuthService.reissuanceToken(refreshToken);
       return { data };
-    } catch (error) {
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&
@@ -120,18 +158,18 @@ export const reissuanceToken = createAsyncThunk(
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));
-      return thunkAPI.rejectWithValue();
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-export const getUserInfo = createAsyncThunk(
+export const getUserInfo = createAsyncThunk<any, GetUserInfoType>(
   "auth/login",
   async ({ accessToken }, thunkAPI) => {
     try {
       const data = await UserService.getUserProfile(accessToken);
       return { user: data };
-    } catch (error) {
+    } catch (error: any) {
       const message =
         (error.response &&
           error.response.data &&
@@ -139,59 +177,76 @@ export const getUserInfo = createAsyncThunk(
         error.message ||
         error.toString();
       thunkAPI.dispatch(setMessage(message));
-      return thunkAPI.rejectWithValue();
+      return thunkAPI.rejectWithValue(error);
     }
   }
 );
 
-export const reset = createAsyncThunk("auth/reset", async () => {
+export const reset = createAsyncThunk("auth/reset", async (_, thunkAPI) => {
+  thunkAPI.dispatch(resetFulfilled());
   return { isLoggedIn: false, user: null };
 });
 
-const initialState = user
+interface AuthState {
+  isLoggedIn: boolean;
+  user: any[] | null;
+}
+
+const initialState: AuthState = user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user: null };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  extraReducers: {
-    [register.fulfilled]: (state) => {
+  reducers: {
+    registerFulfilled: (state) => {
       state.isLoggedIn = false;
     },
-    [register.rejected]: (state) => {
+    registerRejected: (state) => {
       state.isLoggedIn = false;
     },
-    [login.fulfilled]: (state, action) => {
+    loginFulfilled: (state, action) => {
       state.isLoggedIn = true;
       state.user = action.payload.user;
     },
-    [login.rejected]: (state) => {
+    loginRejected: (state) => {
       state.isLoggedIn = false;
       state.user = null;
     },
-    [socialLogin.fulfilled]: (state, action) => {
+    socialLoginFulfilled: (state, action) => {
       state.isLoggedIn = true;
       state.user = action.payload.user;
     },
-    [socialLogin.rejected]: (state) => {
+    socialLoginRejected: (state) => {
       state.isLoggedIn = false;
       state.user = null;
     },
-    [logout.fulfilled]: (state) => {
+    logoutFulfilled: (state) => {
       state.isLoggedIn = false;
       state.user = null;
     },
-    [logout.rejected]: (state) => {
+    logoutRejected: (state) => {
       state.isLoggedIn = true;
-      state.user = [...state.user];
+      state.user = state.user !== null ? [...state.user] : null;
     },
-    [reset.fulfilled]: (state) => {
+    resetFulfilled: (state) => {
       state.isLoggedIn = false;
       state.user = null;
     },
   },
 });
 
+const {
+  registerFulfilled,
+  registerRejected,
+  loginFulfilled,
+  loginRejected,
+  socialLoginFulfilled,
+  socialLoginRejected,
+  logoutFulfilled,
+  logoutRejected,
+  resetFulfilled,
+} = authSlice.actions;
 const { reducer } = authSlice;
 export default reducer;

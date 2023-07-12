@@ -2,7 +2,20 @@ import React from "react";
 import css from "app/components/Lecture/Lecture.module.css";
 import { Link } from "react-router-dom";
 
-const Lecture = (props) => {
+interface LectureType {
+  lecture: {
+    id: number;
+    authorId: number;
+    authorImage: string;
+    authorName: string;
+    createdAt: string;
+    body: string;
+    favoritesCount: number;
+    title: string;
+  };
+}
+
+const Lecture = (props: LectureType) => {
   const {
     id,
     authorId,

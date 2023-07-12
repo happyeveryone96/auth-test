@@ -1,13 +1,25 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import css from "app/components/Consulting/Consulting.module.css";
+import css from "app/components/Mentor/Mentor.module.css";
 
-const Consulting = (props) => {
+interface MentorType {
+  mentor: {
+    id: number;
+    authorId: number;
+    authorImage: string;
+    authorName: string;
+    createdAt: string;
+    body: string;
+    title: string;
+  };
+}
+
+const Mentor = (props: MentorType) => {
   const { id, authorId, authorImage, authorName, createdAt, body, title } =
-    props.consulting;
+    props.mentor;
 
   return (
-    <div className={css["consulting-container"]}>
+    <div className={css["mentor-container"]}>
       <div className="article-preview">
         <div className={css["profile"]}>
           <div className={css["profile-box"]}>
@@ -19,7 +31,7 @@ const Consulting = (props) => {
               />
             </Link>
             <div className={css["author-box"]}>
-              <Link className={css["author"]} to={`/profile/${authorId}`}>
+              <Link className={css["author"]} to={`/mentor/${authorId}`}>
                 {authorName}
               </Link>
               <div className={css["date"]}>{createdAt}</div>
@@ -27,7 +39,7 @@ const Consulting = (props) => {
           </div>
         </div>
 
-        <Link to={`/consulting/${id}`} className="preview-link">
+        <Link to={`/mentor/${id}`} className="preview-link">
           <h1>{title}</h1>
           <p>{body}</p>
           <span>Read more...</span>
@@ -37,4 +49,4 @@ const Consulting = (props) => {
   );
 };
 
-export default Consulting;
+export default Mentor;
