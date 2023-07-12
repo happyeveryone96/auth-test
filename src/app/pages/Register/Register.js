@@ -21,37 +21,67 @@ const Register = () => {
   }, [dispatch]);
 
   const initialValues = {
-    username: "",
+    nickname: "",
     email: "",
     password: "",
   };
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string()
-      .test(
-        "len",
-        "The username must be between 3 and 20 characters.",
-        (val) =>
-          val && val.toString().length >= 3 && val.toString().length <= 20
-      )
-      .required("username can't be blank"),
+    nickname: Yup.string().required("닉네임을 입력해주세요."),
     email: Yup.string()
-      .email("This is not a valid email.")
-      .required("email can't be blank"),
+      .email("이메일 형식에 맞지 않습니다.")
+      .required("이메일을 입력해주세요."),
     password: Yup.string()
+      .required("비밀번호를 입력해주세요.")
+      .min(8, "비밀번호는 최소 8자리 이상 입력해주세요.")
       .test(
-        "len",
-        "The password must be between 6 and 40 characters.",
-        (val) =>
-          val && val.toString().length >= 6 && val.toString().length <= 40
+        "password",
+        "비밀번호는 문자, 숫자, 특수문자를 모두 포함해야 합니다.",
+        (value) => {
+          const optionalSpeciesCount = [
+            /[A-Z]/.test(value),
+            /[a-z]/.test(value),
+            /[\u3131-\uD79D]/.test(value),
+          ].filter(Boolean).length;
+
+          const essentialSpeciesCount = [
+            /[@$!%*?&]/.test(value),
+            /\d/.test(value),
+          ].filter(Boolean).length;
+
+          return optionalSpeciesCount >= 1 && essentialSpeciesCount === 2;
+        }
       )
-      .required("password can't be blank"),
+      .test(
+        "password",
+        "비밀번호는 닉네임과 같을 수 없습니다.",
+        (value, { parent }) => {
+          const isUsernameMatch = value !== parent.nickname;
+          return isUsernameMatch;
+        }
+      )
+      .test(
+        "password",
+        "비밀번호는 닉네임을 포함할 수 없습니다.",
+        (value, { parent }) => {
+          const isNicknameContained = value.includes(parent.nickname);
+          return !isNicknameContained;
+        }
+      )
+      .test(
+        "password",
+        "비밀번호는 이메일 아이디와 같을 수 없습니다.",
+        (value, { parent }) => {
+          const isEmailIdContained = value !== parent.email?.split("@")[0];
+          return isEmailIdContained;
+        }
+      ),
   });
 
   const handleRegister = (formValue) => {
-    const { username, email, password } = formValue;
+    const { nickname, email, password } = formValue;
 
-    dispatch(register({ username, email, password }))
+    dispatch(register({ nickname, email, password }))
       .unwrap()
       .then(() => {
         navigate("/login");
@@ -75,8 +105,8 @@ const Register = () => {
                   <Link to="/login">Have an account?</Link>
                 </p>
                 <FormField
-                  placeholder="Username"
-                  name="username"
+                  placeholder="Nickname"
+                  name="nickname"
                   type="text"
                   errors={errors}
                   touched={touched}

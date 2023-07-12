@@ -4,7 +4,7 @@ import { Navigate, useNavigate, useLocation, Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import qs from "query-string";
-import FormField from "../../components/FormField/FormField";
+import FormField from "app/components/FormField/FormField";
 
 import { login, socialLogin } from "app/slices/auth";
 import { clearMessage } from "app/slices/message";
@@ -49,8 +49,28 @@ const Login = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required("email can't be blank"),
-    password: Yup.string().required("password can't be blank"),
+    email: Yup.string().required("이메일을 입력해주세요."),
+    password: Yup.string()
+      .required("비밀번호를 입력해주세요.")
+      .min(8, "비밀번호는 최소 8자리 이상 입력해주세요.")
+      .test(
+        "password",
+        "비밀번호는 문자, 숫자, 특수문자를 모두 포함해야 합니다.",
+        (value) => {
+          const optionalSpeciesCount = [
+            /[A-Z]/.test(value),
+            /[a-z]/.test(value),
+            /[\u3131-\uD79D]/.test(value),
+          ].filter(Boolean).length;
+
+          const essentialSpeciesCount = [
+            /[@$!%*?&]/.test(value),
+            /\d/.test(value),
+          ].filter(Boolean).length;
+
+          return optionalSpeciesCount >= 1 && essentialSpeciesCount === 2;
+        }
+      ),
   });
 
   const handleLogin = (formValue) => {
