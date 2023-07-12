@@ -2,16 +2,16 @@ import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { reset } from "app/slices/auth";
+import { logout } from "app/slices/auth";
 
 import "app/components/Navbar/Navbar.css";
-
-import { logout } from "app/slices/auth";
 
 const Navbar = () => {
   const refreshToken = localStorage.getItem("refreshToken");
   const accessToken = localStorage.getItem("accessToken");
 
   const { isLoggedIn } = useSelector((state) => state.auth);
+  console.log(isLoggedIn);
 
   const dispatch = useDispatch();
 
@@ -59,7 +59,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" onClick={logOut}>
+                  <Link to="" className="nav-link" onClick={logOut}>
                     LogOut
                   </Link>
                 </li>

@@ -1,5 +1,5 @@
 {
-  "name": "redux-toolkit-auth",
+  "name": "gptus-prototype",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "miragejs": "^0.1.47"
+    "miragejs": "^0.1.47",
+    "typescript": "^5.1.6"
   }
 }

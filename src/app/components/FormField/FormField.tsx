@@ -2,9 +2,18 @@ import React from "react";
 import { Field, ErrorMessage } from "formik";
 import "app/components/FormField/FormField.css";
 
-const FormField = (props) => {
-  const { placeholder, name, type, errors, touched, disabled, as } = props;
+interface FormFieldType {
+  placeholder: string;
+  name: string;
+  type: string;
+  errors: any;
+  touched: any;
+  disabled: boolean;
+  as?: string;
+}
 
+const FormField = (props: FormFieldType) => {
+  const { placeholder, name, type, errors, touched, disabled, as } = props;
   const isInvalid = errors[name] && touched[name];
 
   return (

@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { register } from "app/slices/auth";
 import { clearMessage } from "app/slices/message";
 
-import FormField from "app/components/FormField/FormField.js";
+import FormField from "app/components/FormField/FormField";
 
 import "app/pages/Register/Register.css";
 

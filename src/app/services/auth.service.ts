@@ -1,7 +1,7 @@
 import { instance } from "app/instance/axios.instance";
 import axios from "axios";
 
-const register = (username, email, password) => {
+const register = (username: string, email: string, password: string) => {
   return instance.post("/users", {
     username,
     email,
@@ -9,7 +9,7 @@ const register = (username, email, password) => {
   });
 };
 
-const login = (email, password) => {
+const login = (email: string, password: string) => {
   return instance
     .post("/users/login", {
       email,
@@ -28,7 +28,7 @@ const login = (email, password) => {
     });
 };
 
-const logout = (refreshToken, accessToken) => {
+const logout = (refreshToken: string, accessToken: string) => {
   return instance
     .post(
       "/users/logout",
@@ -51,7 +51,7 @@ const logout = (refreshToken, accessToken) => {
     .catch((err) => console.log(err));
 };
 
-const reissuanceToken = (refreshToken) => {
+const reissuanceToken = (refreshToken: string) => {
   return axios
     .post("http://localhost:8080/user/refreshToken", {
       refreshToken,
