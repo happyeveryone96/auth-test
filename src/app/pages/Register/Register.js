@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import moment from "moment";
 
 import { register } from "app/slices/auth";
 import { clearMessage } from "app/slices/message";
@@ -24,6 +25,9 @@ const Register = () => {
     nickname: "",
     email: "",
     password: "",
+    passwordCheck: "",
+    phoneNumber: "",
+    birthDate: "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -56,8 +60,30 @@ const Register = () => {
         "password",
         "비밀번호는 닉네임과 같을 수 없습니다.",
         (value, { parent }) => {
-          const isUsernameMatch = value !== parent.nickname;
-          return isUsernameMatch;
+          const isNicknameMatch = value !== parent.nickname;
+          return isNicknameMatch;
+        }
+      )
+      .test(
+        "password",
+        "비밀번호는 휴대폰 번호를 포함할 수 없습니다.",
+        (value, { parent }) => {
+          const isPhoneNumberContained = value.includes(parent.phoneNumber);
+          return !isPhoneNumberContained;
+        }
+      )
+      .test(
+        "password",
+        "비밀번호는 생년월일을 포함할 수 없습니다.",
+        (value, { parent }) => {
+          const { birthDate } = parent;
+          const sixDigitsBirthDate = birthDate.substr(2, 6);
+          const forDigitsBirthDate = birthDate.substr(4, 4);
+          const isBirthDateContained =
+            value.includes(birthDate) |
+            value.includes(sixDigitsBirthDate) |
+            value.includes(forDigitsBirthDate);
+          return !isBirthDateContained;
         }
       )
       .test(
@@ -75,7 +101,56 @@ const Register = () => {
           const isEmailIdContained = value !== parent.email?.split("@")[0];
           return isEmailIdContained;
         }
+      )
+      .test(
+        "password",
+        "비밀번호는 휴대폰 번호의 마지막 4자리를 포함할 수 없습니다.",
+        (value, { parent }) => {
+          const phoneNumber = parent.phoneNumber;
+          const lastFourDigits = phoneNumber.substr(phoneNumber.length - 4);
+          return !value.includes(lastFourDigits);
+        }
+      )
+      .test(
+        "password",
+        "비밀번호는 휴대폰 번호의 중간 자리를 포함할 수 없습니다.",
+        (value, { parent }) => {
+          const phoneNumber = parent.phoneNumber;
+          let middleDigits;
+          if (phoneNumber.length === 11) {
+            middleDigits = phoneNumber.substr(3, 4);
+          } else if (phoneNumber.length === 10) {
+            middleDigits = phoneNumber.substr(3, 3);
+          }
+          return !value.includes(middleDigits);
+        }
       ),
+    passwordCheck: Yup.string()
+      .required("비밀번호를 한번 더 입력해주세요.")
+      .test(
+        "passwordCheck",
+        "비밀번호와 동일하지 않습니다.",
+        (value, { parent }) => {
+          const isPasswordMatch = value !== parent.password;
+          return !isPasswordMatch;
+        }
+      ),
+    phoneNumber: Yup.string()
+      .required("휴대폰 번호를 입력해주세요.")
+      .matches(
+        /^(010)[0-9]{3,4}[0-9]{4}$/,
+        "유효하지 않은 휴대폰 번호 형식입니다."
+      ),
+    birthDate: Yup.string()
+      .required("생년월일을 입력해주세요.")
+      .matches(
+        /^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/,
+        "유효하지 않은 생년월일입니다."
+      )
+      .test("valid-date", "유효하지 않은 생년월일입니다.", (value) => {
+        const date = moment(value, "YYYYMMDD", true);
+        return date.isValid();
+      }),
   });
 
   const handleRegister = (formValue) => {
@@ -105,23 +180,44 @@ const Register = () => {
                   <Link to="/login">Have an account?</Link>
                 </p>
                 <FormField
-                  placeholder="Nickname"
+                  placeholder="닉네임"
                   name="nickname"
                   type="text"
                   errors={errors}
                   touched={touched}
                 />
                 <FormField
-                  placeholder="Email"
+                  placeholder="이메일"
                   name="email"
                   type="text"
                   errors={errors}
                   touched={touched}
                 />
                 <FormField
-                  placeholder="Password"
+                  placeholder="비밀번호"
                   name="password"
                   type="password"
+                  errors={errors}
+                  touched={touched}
+                />
+                <FormField
+                  placeholder="비밀번호 확인"
+                  name="passwordCheck"
+                  type="password"
+                  errors={errors}
+                  touched={touched}
+                />
+                <FormField
+                  placeholder="휴대폰 번호"
+                  name="phoneNumber"
+                  type="text"
+                  errors={errors}
+                  touched={touched}
+                />
+                <FormField
+                  placeholder="생년월일"
+                  name="birthDate"
+                  type="text"
                   errors={errors}
                   touched={touched}
                 />
