@@ -46,12 +46,12 @@ const Register = () => {
             /[A-Z]/.test(value),
             /[a-z]/.test(value),
             /[\u3131-\uD79D]/.test(value),
-          ].filter(Boolean).length;
+          ].filter(Boolean)?.length;
 
           const essentialSpeciesCount = [
             /[@$!%*?&]/.test(value),
             /\d/.test(value),
-          ].filter(Boolean).length;
+          ].filter(Boolean)?.length;
 
           return optionalSpeciesCount >= 1 && essentialSpeciesCount === 2;
         }
@@ -77,13 +77,15 @@ const Register = () => {
         "비밀번호는 생년월일을 포함할 수 없습니다.",
         (value, { parent }) => {
           const { birthDate } = parent;
-          const sixDigitsBirthDate = birthDate.substr(2, 6);
-          const forDigitsBirthDate = birthDate.substr(4, 4);
-          const isBirthDateContained =
-            value.includes(birthDate) |
-            value.includes(sixDigitsBirthDate) |
-            value.includes(forDigitsBirthDate);
-          return !isBirthDateContained;
+          if (birthDate !== null) {
+            const sixDigitsBirthDate = birthDate?.substr(2, 6);
+            const forDigitsBirthDate = birthDate?.substr(4, 4);
+            const isBirthDateContained =
+              value.includes(birthDate) |
+              value.includes(sixDigitsBirthDate) |
+              value.includes(forDigitsBirthDate);
+            return !isBirthDateContained;
+          }
         }
       )
       .test(
@@ -96,10 +98,10 @@ const Register = () => {
       )
       .test(
         "password",
-        "비밀번호는 이메일 아이디와 같을 수 없습니다.",
+        "비밀번호는 이메일 아이디를 포함할 수 없습니다.",
         (value, { parent }) => {
-          const isEmailIdContained = value !== parent.email?.split("@")[0];
-          return isEmailIdContained;
+          const emailId = parent.email?.split("@")[0];
+          return !value.includes(emailId);
         }
       )
       .test(
@@ -107,8 +109,10 @@ const Register = () => {
         "비밀번호는 휴대폰 번호의 마지막 4자리를 포함할 수 없습니다.",
         (value, { parent }) => {
           const phoneNumber = parent.phoneNumber;
-          const lastFourDigits = phoneNumber.substr(phoneNumber.length - 4);
-          return !value.includes(lastFourDigits);
+          if (phoneNumber !== null) {
+            const lastFourDigits = phoneNumber?.substr(phoneNumber?.length - 4);
+            return !value.includes(lastFourDigits);
+          }
         }
       )
       .test(
@@ -117,12 +121,14 @@ const Register = () => {
         (value, { parent }) => {
           const phoneNumber = parent.phoneNumber;
           let middleDigits;
-          if (phoneNumber.length === 11) {
-            middleDigits = phoneNumber.substr(3, 4);
-          } else if (phoneNumber.length === 10) {
-            middleDigits = phoneNumber.substr(3, 3);
+          if (phoneNumber !== null) {
+            if (phoneNumber?.length === 11) {
+              middleDigits = phoneNumber?.substr(3, 4);
+            } else if (phoneNumber?.length === 10) {
+              middleDigits = phoneNumber?.substr(3, 3);
+            }
+            return !value.includes(middleDigits);
           }
-          return !value.includes(middleDigits);
         }
       ),
     passwordCheck: Yup.string()
