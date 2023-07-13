@@ -16,6 +16,9 @@
 .register-container .btn {
   background-color: #5cb85c;
   border-color: #5cb85c;
+  color: white;
+  font-size: 20px;
+  margin-top: 30px;
 }
 
 .alert {
@@ -24,4 +27,18 @@
   align-items: center;
   position: relative;
   top: 50px;
+}
+
+.gender-radio input {
+  margin: 10px 10px 0;
+}
+
+.address {
+  margin: 20px 0;
+}
+
+.invalid {
+  color: #dc3545;
+  font-size: 14px;
+  margin-bottom: 10px;
 }

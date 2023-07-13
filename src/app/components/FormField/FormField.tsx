@@ -10,11 +10,14 @@ interface FormFieldType {
   touched: any;
   disabled: boolean;
   as?: string;
+  value?: string;
 }
 
 const FormField = (props: FormFieldType) => {
-  const { placeholder, name, type, errors, touched, disabled, as } = props;
+  const { placeholder, name, type, errors, touched, disabled, as, value } =
+    props;
   const isInvalid = errors[name] && touched[name];
+  const hasValue = value && value.trim().length > 0;
 
   return (
     <div>
@@ -24,12 +27,19 @@ const FormField = (props: FormFieldType) => {
         type={type}
         disabled={disabled}
         as={as}
+        value={value}
         className={
           "form-group form-control form-control-lg" +
           (isInvalid ? " is-invalid" : "")
         }
       />
-      <ErrorMessage name={name} component="div" className="invalid-feedback" />
+      {!hasValue && (
+        <ErrorMessage
+          name={name}
+          component="div"
+          className="invalid-feedback"
+        />
+      )}
     </div>
   );
 };
