@@ -20,8 +20,6 @@ const Navbar = () => {
   const isConsultingPage = pathname === "/consulting";
   const isMentorPage = pathname === "/mentor";
 
-  console.log(isMainPage);
-
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
