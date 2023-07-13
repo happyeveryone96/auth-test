@@ -210,96 +210,106 @@ const Register = () => {
           <Form>
             <div className="register-container">
               <div className="col-md-6 offset-md-3 col-xs-12">
-                <h1 className="text-xs-center">Sign up</h1>
-                <p className="text-xs-center">
+                <h2 className="text-xs-left">회원정보 입력</h2>
+                <p className="text-xs-left">
                   <Link to="/login">Have an account?</Link>
                 </p>
                 <FormField
-                  placeholder="닉네임"
-                  name="nickname"
-                  type="text"
-                  errors={errors}
-                  touched={touched}
-                />
-                <FormField
-                  placeholder="이메일"
+                  label="이메일"
+                  placeholder="이메일을 입력해주세요."
                   name="email"
                   type="text"
                   errors={errors}
                   touched={touched}
                 />
                 <FormField
-                  placeholder="비밀번호"
+                  label="비밀번호"
+                  placeholder="문자, 숫자, 특수문자를 모두 포함시켜주세요."
                   name="password"
                   type="password"
                   errors={errors}
                   touched={touched}
                 />
                 <FormField
-                  placeholder="비밀번호 확인"
+                  label="비밀번호 확인"
+                  placeholder="비밀번호를 한번 더 입력해주세요."
                   name="passwordCheck"
                   type="password"
                   errors={errors}
                   touched={touched}
                 />
-                <FormField
-                  placeholder="휴대폰 번호"
-                  name="phoneNumber"
-                  type="text"
-                  errors={errors}
-                  touched={touched}
-                />
-                <FormField
-                  placeholder="생년월일"
-                  name="birthDate"
-                  type="text"
-                  errors={errors}
-                  touched={touched}
-                />
-                <FormField
-                  placeholder="주소"
-                  name="address"
-                  type="text"
-                  errors={errors}
-                  touched={touched}
-                  value={address}
-                  disabled
-                />
-
-                <div
-                  className="gender-radio"
-                  role="group"
-                  aria-labelledby="my-radio-group"
-                >
-                  성별
-                  <Field type="radio" name="gender" value="male" />
-                  남성
-                  <Field type="radio" name="gender" value="female" />
-                  여성
-                  <Field type="radio" name="gender" value="none" />
-                  선택하지 않음
-                </div>
-                <ErrorMessage
-                  name="gender"
-                  component="div"
-                  className="invalid"
-                />
-
-                {visible ? (
-                  <div>
-                    <button className="btn" onClick={handleButtonClick}>
-                      닫기
-                    </button>
-                    <DaumPostcodeEmbed
-                      className="address"
-                      onComplete={handleComplete}
-                    />
+                <div className="individual-info-box">
+                  <h2 className="text-xs-left">개인정보 입력</h2>
+                  <FormField
+                    label="닉네임"
+                    placeholder="닉네임을 입력해주세요."
+                    name="nickname"
+                    type="text"
+                    errors={errors}
+                    touched={touched}
+                  />
+                  <FormField
+                    label="휴대폰 번호"
+                    placeholder="휴대폰 번호을 입력해주세요."
+                    name="phoneNumber"
+                    type="text"
+                    errors={errors}
+                    touched={touched}
+                  />
+                  <FormField
+                    label="생년월일"
+                    placeholder="YYYYMMDD"
+                    name="birthDate"
+                    type="text"
+                    errors={errors}
+                    touched={touched}
+                  />
+                  <div
+                    className="gender-radio"
+                    role="group"
+                    aria-labelledby="my-radio-group"
+                  >
+                    성별
+                    <br />
+                    <Field type="radio" name="gender" value="male" />
+                    남성
+                    <Field type="radio" name="gender" value="female" />
+                    여성
+                    <Field type="radio" name="gender" value="none" />
+                    선택하지 않음
                   </div>
-                ) : (
-                  <button className="btn" onClick={handleButtonClick}>
-                    주소 검색
-                  </button>
-                )}
+                  <ErrorMessage
+                    name="gender"
+                    component="div"
+                    className="invalid"
+                  />
+                  <FormField
+                    label="주소"
+                    placeholder="주소를 입력해주세요."
+                    name="address"
+                    type="text"
+                    errors={errors}
+                    touched={touched}
+                    value={address}
+                    disabled
+                  />
+                  {visible ? (
+                    <div>
+                      <button className="btn" onClick={handleButtonClick}>
+                        닫기
+                      </button>
+                      <DaumPostcodeEmbed
+                        className="address"
+                        onComplete={handleComplete}
+                      />
+                    </div>
+                  ) : (
+                    <button className="btn" onClick={handleButtonClick}>
+                      주소 검색
+                    </button>
+                  )}
+                </div>
+
                 <div className="form-group">
                   <button
                     type="submit"
