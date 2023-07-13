@@ -38,19 +38,35 @@ const FormField = (props: FormFieldType) => {
   return (
     <div>
       <label htmlFor={name}>{label}</label>
-      <Field
-        placeholder={placeholder}
-        name={name}
-        type={type}
-        disabled={disabled}
-        as={as}
-        onKeyPress={handleKeyUp}
-        value={value}
-        className={
-          "form-group form-control form-control-lg" +
-          (!hasValue && isInvalid ? " is-invalid" : "")
-        }
-      />
+      {hasValue === undefined ? (
+        <Field
+          placeholder={placeholder}
+          name={name}
+          type={type}
+          disabled={disabled}
+          as={as}
+          onKeyPress={handleKeyUp}
+          className={
+            "form-group form-control form-control-lg" +
+            (isInvalid ? " is-invalid" : "")
+          }
+        />
+      ) : (
+        <Field
+          placeholder={placeholder}
+          name={name}
+          type={type}
+          disabled={disabled}
+          as={as}
+          onKeyPress={handleKeyUp}
+          value={value}
+          className={
+            "form-group form-control form-control-lg" +
+            (!hasValue && isInvalid ? " is-invalid" : "")
+          }
+        />
+      )}
+
       {!hasValue && (
         <ErrorMessage
           name={name}

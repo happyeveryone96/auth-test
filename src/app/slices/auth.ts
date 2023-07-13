@@ -5,7 +5,7 @@ import AuthService from "app/services/auth.service";
 import UserService from "app/services/user.service";
 
 interface RegisterType {
-  username: string;
+  nickname: string;
   email: string;
   password: string;
 }
@@ -39,9 +39,9 @@ const user = JSON.parse(userString || "null");
 
 export const register = createAsyncThunk<any, RegisterType>(
   "auth/register",
-  async ({ username, email, password }, thunkAPI) => {
+  async ({ nickname, email, password }, thunkAPI) => {
     try {
-      const response = await AuthService.register(username, email, password);
+      const response = await AuthService.register(nickname, email, password);
       thunkAPI.dispatch(setMessage(response.data.message));
       thunkAPI.dispatch(registerFulfilled());
       return response.data;
@@ -208,7 +208,7 @@ const authSlice = createSlice({
     },
     loginFulfilled: (state, action) => {
       state.isLoggedIn = true;
-      state.user = action.payload.user;
+      state.user = action.payload;
     },
     loginRejected: (state) => {
       state.isLoggedIn = false;
@@ -216,7 +216,7 @@ const authSlice = createSlice({
     },
     socialLoginFulfilled: (state, action) => {
       state.isLoggedIn = true;
-      state.user = action.payload.user;
+      state.user = action.payload;
     },
     socialLoginRejected: (state) => {
       state.isLoggedIn = false;

@@ -15,7 +15,7 @@ import "app/pages/Register/Register.css";
 
 const Register = () => {
   const { message } = useSelector((state) => state.message);
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const [address, setAddress] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -184,9 +184,8 @@ const Register = () => {
     address: Yup.string().required("주소를 입력해주세요."),
   });
 
-  const handleRegister = (formValue) => {
-    const { nickname, email, password } = formValue;
-
+  const handleRegister = (values) => {
+    const { nickname, email, password } = values;
     dispatch(register({ nickname, email, password }))
       .unwrap()
       .then(() => {
@@ -199,15 +198,17 @@ const Register = () => {
     setVisible((prevVisible) => !prevVisible);
   };
 
+  const handleKeyUp = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  };
+
   return (
     <div>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleRegister}
-      >
-        {({ errors, touched }) => (
-          <Form>
+      <Formik initialValues={initialValues} validationSchema={validationSchema}>
+        {({ values, errors, touched }) => (
+          <Form values={values}>
             <div className="register-container">
               <div className="col-md-6 offset-md-3 col-xs-12">
                 <h2 className="text-xs-left">회원정보 입력</h2>
@@ -271,11 +272,26 @@ const Register = () => {
                   >
                     성별
                     <br />
-                    <Field type="radio" name="gender" value="male" />
+                    <Field
+                      type="radio"
+                      name="gender"
+                      value="male"
+                      onKeyPress={handleKeyUp}
+                    />
                     남성
-                    <Field type="radio" name="gender" value="female" />
+                    <Field
+                      type="radio"
+                      name="gender"
+                      value="female"
+                      onKeyPress={handleKeyUp}
+                    />
                     여성
-                    <Field type="radio" name="gender" value="none" />
+                    <Field
+                      type="radio"
+                      name="gender"
+                      value="none"
+                      onKeyPress={handleKeyUp}
+                    />
                     선택하지 않음
                   </div>
                   <ErrorMessage
@@ -312,7 +328,7 @@ const Register = () => {
 
                 <div className="form-group">
                   <button
-                    type="submit"
+                    onClick={() => handleRegister(values)}
                     className="btn btn-lg btn-primary pull-xs-right"
                   >
                     <span>Sign up</span>
