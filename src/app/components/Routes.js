@@ -12,11 +12,13 @@ import MentorPage from "app/pages/MentorPage/MentorPage";
 import MentorDetail from "app/pages/MentorDetail/MentorDetail";
 import FindId from "app/pages/FindId/FindId";
 import FindPassword from "app/pages/FindPassword/FindPassword";
+import LecturePage from "app/pages/LecturePage/LecturePage";
 
 const MainRouter = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/lecture" element={<LecturePage />} />
       <Route path="/consulting" element={<ConsultingPage />} />
       <Route path="/mentor" element={<MentorPage />} />
       <Route path="/mentor/:id" element={<MentorDetail />} />

@@ -15,7 +15,7 @@ const Navbar = () => {
   const { pathname } = location;
   const isSignUpPage = pathname === "/register";
   const isSignInPage = pathname === "/login";
-  const isMainPage = pathname === "/";
+  const isLecturePage = pathname === "/lecture";
   const isSettingPage = pathname === "/settings";
   const isConsultingPage = pathname === "/consulting";
   const isMentorPage = pathname === "/mentor";
@@ -46,8 +46,11 @@ const Navbar = () => {
         <div>
           <div className="nav ">
             <li className="nav-item ">
-              <Link to={"/"} className={`nav-link ${isMainPage && "selected"}`}>
-                Home
+              <Link
+                to={"/lecture"}
+                className={`nav-link ${isLecturePage && "selected"}`}
+              >
+                Lecture
               </Link>
             </li>
             <li className="nav-item">
