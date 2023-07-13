@@ -19,6 +19,7 @@
 
 .register-container .text-xs-left a {
   color: #5cb85c;
+  text-decoration: none;
 }
 
 .register-container .btn {

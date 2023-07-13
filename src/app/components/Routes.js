@@ -10,6 +10,8 @@ import ConsultingPage from "app/pages/ConsultingPage/ConsultingPage";
 import ConsultingDetail from "app/pages/ConsultingDetail/ConsultingDetail";
 import MentorPage from "app/pages/MentorPage/MentorPage";
 import MentorDetail from "app/pages/MentorDetail/MentorDetail";
+import FindId from "app/pages/FindId/FindId";
+import FindPassword from "app/pages/FindPassword/FindPassword";
 
 const MainRouter = () => {
   return (
@@ -23,6 +25,8 @@ const MainRouter = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/lecture/:id" element={<LectureDetail />} />
+      <Route path="/findId" element={<FindId />} />
+      <Route path="/findPw" element={<FindPassword />} />
     </Routes>
   );
 };
