@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Formik, Form } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import moment from "moment";
+import DaumPostcodeEmbed from "react-daum-postcode";
 
 import { register } from "app/slices/auth";
 import { clearMessage } from "app/slices/message";
@@ -14,8 +15,28 @@ import "app/pages/Register/Register.css";
 
 const Register = () => {
   const { message } = useSelector((state) => state.message);
+  const [visible, setVisible] = useState(true);
+  const [address, setAddress] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleComplete = (data) => {
+    let fullAddress = data.address;
+    let extraAddress = "";
+
+    if (data.addressType === "R") {
+      if (data.bname !== "") {
+        extraAddress += data.bname;
+      }
+      if (data.buildingName !== "") {
+        extraAddress +=
+          extraAddress !== "" ? `, ${data.buildingName}` : data.buildingName;
+      }
+      fullAddress += extraAddress !== "" ? ` (${extraAddress})` : "";
+    }
+    setAddress(fullAddress);
+    setVisible(false);
+  };
 
   useEffect(() => {
     dispatch(clearMessage());
@@ -28,6 +49,8 @@ const Register = () => {
     passwordCheck: "",
     phoneNumber: "",
     birthDate: "",
+    gender: "",
+    address: "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -157,6 +180,8 @@ const Register = () => {
         const date = moment(value, "YYYYMMDD", true);
         return date.isValid();
       }),
+    gender: Yup.string().required("성별을 선택해주세요."),
+    address: Yup.string().required("주소를 입력해주세요."),
   });
 
   const handleRegister = (formValue) => {
@@ -168,6 +193,10 @@ const Register = () => {
         navigate("/login");
       })
       .catch((err) => console.log(err));
+  };
+
+  const handleButtonClick = () => {
+    setVisible((prevVisible) => !prevVisible);
   };
 
   return (
@@ -227,6 +256,50 @@ const Register = () => {
                   errors={errors}
                   touched={touched}
                 />
+                <FormField
+                  placeholder="주소"
+                  name="address"
+                  type="text"
+                  errors={errors}
+                  touched={touched}
+                  value={address}
+                  disabled
+                />
+
+                <div
+                  className="gender-radio"
+                  role="group"
+                  aria-labelledby="my-radio-group"
+                >
+                  성별
+                  <Field type="radio" name="gender" value="male" />
+                  남성
+                  <Field type="radio" name="gender" value="female" />
+                  여성
+                  <Field type="radio" name="gender" value="none" />
+                  선택하지 않음
+                </div>
+                <ErrorMessage
+                  name="gender"
+                  component="div"
+                  className="invalid"
+                />
+
+                {visible ? (
+                  <div>
+                    <button className="btn" onClick={handleButtonClick}>
+                      닫기
+                    </button>
+                    <DaumPostcodeEmbed
+                      className="address"
+                      onComplete={handleComplete}
+                    />
+                  </div>
+                ) : (
+                  <button className="btn" onClick={handleButtonClick}>
+                    주소 검색
+                  </button>
+                )}
                 <div className="form-group">
                   <button
                     type="submit"
