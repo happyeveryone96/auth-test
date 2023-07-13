@@ -3,6 +3,7 @@ import { Field, ErrorMessage } from "formik";
 import "app/components/FormField/FormField.css";
 
 interface FormFieldType {
+  label: string;
   placeholder: string;
   name: string;
   type: string;
@@ -14,23 +15,40 @@ interface FormFieldType {
 }
 
 const FormField = (props: FormFieldType) => {
-  const { placeholder, name, type, errors, touched, disabled, as, value } =
-    props;
+  const {
+    label,
+    placeholder,
+    name,
+    type,
+    errors,
+    touched,
+    disabled,
+    as,
+    value,
+  } = props;
   const isInvalid = errors[name] && touched[name];
   const hasValue = value && value.trim().length > 0;
 
+  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+    }
+  };
+
   return (
     <div>
+      <label htmlFor={name}>{label}</label>
       <Field
         placeholder={placeholder}
         name={name}
         type={type}
         disabled={disabled}
         as={as}
+        onKeyPress={handleKeyUp}
         value={value}
         className={
           "form-group form-control form-control-lg" +
-          (isInvalid ? " is-invalid" : "")
+          (!hasValue && isInvalid ? " is-invalid" : "")
         }
       />
       {!hasValue && (

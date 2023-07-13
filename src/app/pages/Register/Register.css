@@ -9,7 +9,14 @@
   margin: 0 auto;
 }
 
-.register-container .text-xs-center a {
+.register-container h2 {
+  font-size: 30px;
+  border-top: 3px solid;
+  margin-top: 30px;
+  padding-top: 30px;
+}
+
+.register-container .text-xs-left a {
   color: #5cb85c;
 }
 
@@ -18,7 +25,11 @@
   border-color: #5cb85c;
   color: white;
   font-size: 20px;
-  margin-top: 30px;
+  /* margin-top: 30px; */
+}
+
+.individual-info-box {
+  padding-top: 30px;
 }
 
 .alert {
