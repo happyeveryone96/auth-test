@@ -16,16 +16,8 @@ interface LectureType {
 }
 
 const Lecture = (props: LectureType) => {
-  const {
-    id,
-    authorId,
-    authorImage,
-    authorName,
-    createdAt,
-    body,
-    favoritesCount,
-    title,
-  } = props.lecture;
+  const { id, authorId, authorImage, authorName, createdAt, body, title } =
+    props.lecture;
 
   return (
     <div className={css["lecture-container"]}>
@@ -45,13 +37,6 @@ const Lecture = (props: LectureType) => {
               </Link>
               <div className={css["date"]}>{createdAt}</div>
             </div>
-          </div>
-
-          <div className={css["info"]}>
-            <button className="btn btn-sm pull-xs-right">
-              <i className="ion-heart"></i>
-              <span className={css["counter"]}> {favoritesCount} </span>
-            </button>
           </div>
         </div>
 
