@@ -3,12 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { reset } from "app/slices/auth";
 import { logout } from "app/slices/auth";
+import { useLocation } from "react-router-dom";
 
 import "app/components/Navbar/Navbar.css";
 
 const Navbar = () => {
   const refreshToken = localStorage.getItem("refreshToken");
   const accessToken = localStorage.getItem("accessToken");
+
+  const location = useLocation();
+  const { pathname } = location;
+  const isSignUpPage = pathname === "/register";
+  const isSignInPage = pathname === "/login";
+  const isMainPage = pathname === "/";
+  const isSettingPage = pathname === "/settings";
+  const isConsultingPage = pathname === "/consulting";
+  const isMentorPage = pathname === "/mentor";
+
+  console.log(isMainPage);
 
   const { isLoggedIn } = useSelector((state) => state.auth);
 
@@ -34,26 +46,35 @@ const Navbar = () => {
         </div>
 
         <div>
-          <div className="nav nav-pills outline-active">
-            <li className="nav-item">
-              <Link to={"/"} className="nav-link">
+          <div className="nav ">
+            <li className="nav-item ">
+              <Link to={"/"} className={`nav-link ${isMainPage && "selected"}`}>
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/consulting"} className="nav-link">
+              <Link
+                to={"/consulting"}
+                className={`nav-link ${isConsultingPage && "selected"}`}
+              >
                 Consulting
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/mentor"} className="nav-link">
+              <Link
+                to={"/mentor"}
+                className={`nav-link ${isMentorPage && "selected"}`}
+              >
                 Mentor
               </Link>
             </li>
             {isLoggedIn ? (
               <>
                 <li className="nav-item">
-                  <Link to={"/settings"} className="nav-link ">
+                  <Link
+                    to={"/settings"}
+                    className={`nav-link ${isSettingPage && "selected"}`}
+                  >
                     Settings
                   </Link>
                 </li>
@@ -66,13 +87,19 @@ const Navbar = () => {
             ) : (
               <>
                 <li className="nav-item">
-                  <Link to={"/login"} className="nav-link">
+                  <Link
+                    to={"/login"}
+                    className={`nav-link ${isSignInPage && "selected"}`}
+                  >
                     Sign in
                   </Link>
                 </li>
 
                 <li className="nav-item">
-                  <Link to={"/register"} className="nav-link">
+                  <Link
+                    to={"/register"}
+                    className={`nav-link ${isSignUpPage && "selected"}`}
+                  >
                     Sign up
                   </Link>
                 </li>

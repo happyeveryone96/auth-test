@@ -5,7 +5,6 @@ import { Navigate } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { reset } from "app/slices/auth";
-import { useNavigate } from "react-router-dom";
 
 import FormField from "app/components/FormField/FormField";
 
@@ -20,8 +19,7 @@ const Settings = () => {
 
   useEffect(() => {
     if (accessToken && isLoggedIn) {
-      UserService.getUserProfile(accessToken)
-      .catch(() => {
+      UserService.getUserProfile(accessToken).catch(() => {
         window.location.reload();
       });
     }

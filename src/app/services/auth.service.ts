@@ -1,9 +1,9 @@
 import { instance } from "app/instance/axios.instance";
 import axios from "axios";
 
-const register = (username: string, email: string, password: string) => {
+const register = (nickname: string, email: string, password: string) => {
   return instance.post("/users", {
-    username,
+    username: nickname,
     email,
     password,
   });

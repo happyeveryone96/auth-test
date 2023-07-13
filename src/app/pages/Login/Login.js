@@ -99,7 +99,7 @@ const Login = () => {
           <Form>
             <div className="login-container">
               <div className="col-md-6 offset-md-3 col-xs-12">
-                <h1 className="text-xs-center">Sign in</h1>
+                <h1 className="text-xs-center">로그인</h1>
                 <p className="text-xs-center">
                   <Link to="/register">Need an account?</Link>
                 </p>

@@ -1,7 +1,8 @@
 .form-group .alert {
-  width: 50vw;
-  position: relative;
-  left: 15px;
+  width: 48vw;
+  margin: 0 auto;
+  top: 50px;
+  max-width: 580px;
 }
 
 .register-container {
@@ -25,19 +26,10 @@
   border-color: #5cb85c;
   color: white;
   font-size: 20px;
-  /* margin-top: 30px; */
 }
 
 .individual-info-box {
   padding-top: 30px;
-}
-
-.alert {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  top: 50px;
 }
 
 .gender-radio input {

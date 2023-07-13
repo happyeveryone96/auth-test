@@ -6,3 +6,15 @@
   display: flex;
   justify-content: space-between;
 }
+
+.nav-link {
+  color: gray;
+}
+
+.nav-link:hover {
+  color: #5cb85c;
+}
+
+.selected {
+  color: #5cb85c;
+}
