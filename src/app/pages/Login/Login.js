@@ -117,6 +117,10 @@ const Login = () => {
                   errors={errors}
                   touched={touched}
                 />
+                <p className="text-xs-center find">
+                  <Link to="/findId">아이디 찾기</Link>
+                  <Link to="/findPw">비밀번호 찾기</Link>
+                </p>
                 <button
                   type="submit"
                   className="form-group btn btn-lg btn-primary pull-xs-right"
