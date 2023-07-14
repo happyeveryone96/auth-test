@@ -9,7 +9,7 @@ interface FormFieldType {
   type: string;
   errors: any;
   touched: any;
-  disabled: boolean;
+  disabled?: boolean;
   as?: string;
   value?: string;
 }
