@@ -184,14 +184,30 @@ const Register = () => {
     address: Yup.string().required("주소를 입력해주세요."),
   });
 
-  const handleRegister = (values) => {
+  const isObjectEmpty = (obj) => {
+    return Object.keys(obj).length === 0;
+  };
+
+  function hasEmptyString(obj) {
+    for (let key in obj) {
+      if (key !== "address" && obj.hasOwnProperty(key) && obj[key] === "") {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  const handleRegister = (values, errors) => {
     const { nickname, email, password } = values;
-    dispatch(register({ nickname, email, password }))
-      .unwrap()
-      .then(() => {
-        navigate("/login");
-      })
-      .catch((err) => console.log(err));
+
+    if (!isObjectEmpty(errors) && !hasEmptyString(values)) {
+      dispatch(register({ nickname, email, password }))
+        .unwrap()
+        .then(() => {
+          navigate("/");
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const handleButtonClick = () => {
@@ -328,7 +344,8 @@ const Register = () => {
 
                 <div className="form-group">
                   <button
-                    onClick={() => handleRegister(values)}
+                    type="button"
+                    onClick={() => handleRegister(values, errors)}
                     className="btn btn-lg btn-primary pull-xs-right"
                   >
                     <span>Sign up</span>
