@@ -3,11 +3,25 @@ import { Link } from "react-router-dom";
 import LECTURE_DETAIL_DATA from "app/data/lectureDetailData";
 import css from "app/pages/ConsultingDetail/ConsultingDetail.module.css";
 
+interface LectureDetailData {
+  authorId: number;
+  authorImage: string;
+  title: string;
+  desc: string;
+  authorName: string;
+  createdAt: string;
+}
+
 const ConsultingDetail = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<LectureDetailData | null>(null);
   useEffect(() => {
     setData(LECTURE_DETAIL_DATA);
   }, []);
+
+  if (!data) {
+    return null;
+  }
+
   const { authorId, authorImage, title, desc, authorName, createdAt } = data;
 
   return (

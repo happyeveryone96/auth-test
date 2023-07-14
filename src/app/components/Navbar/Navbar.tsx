@@ -6,6 +6,14 @@ import { logout } from "app/slices/auth";
 import { useLocation } from "react-router-dom";
 
 import "app/components/Navbar/Navbar.css";
+import { AppDispatch } from "app/store";
+
+interface AuthState {
+  auth: {
+    isLoggedIn: boolean;
+    user: any[] | null;
+  };
+}
 
 const Navbar = () => {
   const refreshToken = localStorage.getItem("refreshToken");
@@ -20,9 +28,9 @@ const Navbar = () => {
   const isConsultingPage = pathname === "/consulting";
   const isMentorPage = pathname === "/mentor";
 
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useSelector((state: AuthState) => state.auth);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const logOut = useCallback(() => {
     dispatch(logout({ refreshToken, accessToken }));

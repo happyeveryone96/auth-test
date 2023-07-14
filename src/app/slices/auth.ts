@@ -22,8 +22,8 @@ interface EditProfileType {
 }
 
 interface LogoutType {
-  accessToken: string;
-  refreshToken: string;
+  accessToken: string | null;
+  refreshToken: string | null;
 }
 
 interface ReissuanceTokenType {
@@ -128,8 +128,10 @@ export const logout = createAsyncThunk<any, LogoutType>(
   "auth/logout",
   async ({ refreshToken, accessToken }, thunkAPI) => {
     try {
-      await AuthService.logout(refreshToken, accessToken);
-      thunkAPI.dispatch(logoutFulfilled());
+      if (refreshToken !== null && accessToken !== null) {
+        await AuthService.logout(refreshToken, accessToken);
+        thunkAPI.dispatch(logoutFulfilled());
+      }
     } catch (error: any) {
       const message =
         (error.response &&
