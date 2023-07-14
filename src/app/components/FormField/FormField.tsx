@@ -3,7 +3,7 @@ import { Field, ErrorMessage } from "formik";
 import "app/components/FormField/FormField.css";
 
 interface FormFieldType {
-  label: string;
+  label?: string;
   placeholder: string;
   name: string;
   type: string;

@@ -1,7 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Login from "app/pages/Login/Login";
 import Register from "app/pages/Register/Register";
 import Home from "app/pages/Home/Home";
 import Settings from "app/pages/Settings/Settings";
@@ -23,7 +22,6 @@ const MainRouter = () => {
       <Route path="/mentor" element={<MentorPage />} />
       <Route path="/mentor/:id" element={<MentorDetail />} />
       <Route path="/consulting/:id" element={<ConsultingDetail />} />
-      <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/settings" element={<Settings />} />
       <Route path="/lecture/:id" element={<LectureDetail />} />
