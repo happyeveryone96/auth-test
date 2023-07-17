@@ -21,8 +21,6 @@ const Navbar = () => {
 
   const location = useLocation();
   const { pathname } = location;
-  const isSignUpPage = pathname === "/register";
-  const isSignInPage = pathname === "/login";
   const isLecturePage = pathname === "/lecture";
   const isSettingPage = pathname === "/settings";
   const isConsultingPage = pathname === "/consulting";
@@ -55,79 +53,90 @@ const Navbar = () => {
   return (
     <>
       <LoginModal isOpen={isModalOpen} close={closeModal} />
-      <nav className="navbar navbar-expand navbar-white">
-        <div className="nav-container">
+      <div className="nav-top">
+        <div className="nav-top-left">
           <div>
             <Link to={"/"} className="navbar-brand">
               GPTUs
             </Link>
           </div>
+          <input type="text" />
+          <div className="search-icon">
+            <img src="/images/search.png" alt="돋보기" />
+          </div>
+        </div>
+        <div className="nav-top-right">
+          {isLoggedIn ? (
+            <Link to="" className="nav-link" onClick={logOut}>
+              로그아웃
+            </Link>
+          ) : (
+            <>
+              <div className="login" onClick={openModal}>
+                로그인
+              </div>
+              <div className="divider">|</div>
+              <Link to="/register" className="register">
+                회원가입
+              </Link>
+            </>
+          )}
 
-          <div>
-            <div className="nav ">
-              <li className="nav-item ">
-                <Link
-                  to={"/lecture"}
-                  className={`nav-link ${isLecturePage && "selected"}`}
-                >
-                  Lecture
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to={"/consulting"}
-                  className={`nav-link ${isConsultingPage && "selected"}`}
-                >
-                  Consulting
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to={"/mentor"}
-                  className={`nav-link ${isMentorPage && "selected"}`}
-                >
-                  Mentor
-                </Link>
-              </li>
-              {isLoggedIn ? (
-                <>
-                  <li className="nav-item">
-                    <Link
-                      to={"/settings"}
-                      className={`nav-link ${isSettingPage && "selected"}`}
-                    >
-                      Settings
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to="" className="nav-link" onClick={logOut}>
-                      LogOut
-                    </Link>
-                  </li>
-                </>
-              ) : (
-                <>
-                  <li className="nav-item">
-                    <Link
-                      to=""
-                      // to={"/login"}
-                      onClick={openModal}
-                      className={`nav-link ${isSignInPage && "selected"}`}
-                    >
-                      Sign in
-                    </Link>
-                  </li>
+          <div className="tutor">GPTUS 선생님 되는 방법</div>
+        </div>
+      </div>
+      <nav className="navbar navbar-expand navbar-white">
+        <div className="nav-container">
+          <div className="nav-container-left">
+            <div className="menu">
+              <img src="/images/menu.png" alt="메뉴" />
+              <span>전체보기</span>
+            </div>
+            <div className="nav-container-center">
+              <Link
+                to={"/lecture"}
+                className={`nav-link ${isLecturePage && "selected"}`}
+              >
+                강의
+              </Link>
+              <Link
+                to={"/consulting"}
+                className={`nav-link ${isConsultingPage && "selected"}`}
+              >
+                상담
+              </Link>
+              <Link
+                to={"/mentor"}
+                className={`nav-link ${isMentorPage && "selected"}`}
+              >
+                강사
+              </Link>
+              <Link to="#" className="nav-link">
+                커뮤니티
+              </Link>
 
-                  <li className="nav-item">
-                    <Link
-                      to={"/register"}
-                      className={`nav-link ${isSignUpPage && "selected"}`}
-                    >
-                      Sign up
-                    </Link>
-                  </li>
-                </>
+              {isLoggedIn && (
+                <Link
+                  to={"/settings"}
+                  className={`nav-link ${isSettingPage && "selected"}`}
+                >
+                  내정보
+                </Link>
               )}
+            </div>
+          </div>
+          <div className="nav-container-right">
+            <div className="guide">
+              <span>
+                <img src="/images/guide.png" alt="이용자 가이드" />
+                이용자 가이드
+              </span>
+            </div>
+            <div className="schedule">
+              <span>
+                <img src="/images/star.png" alt="내강의 일정" />
+                내강의 일정
+              </span>
             </div>
           </div>
         </div>
