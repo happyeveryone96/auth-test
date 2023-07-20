@@ -23,6 +23,9 @@
     "web-vitals": "^2.1.0",
     "yup": "^1.2.0"
   },
+  "overrides": {
+    "typescript": "^5.1.6"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
