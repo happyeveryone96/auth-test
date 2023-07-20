@@ -22,7 +22,7 @@
   align-items: center;
 }
 
-.guide {
+.user-guide {
   color: #666;
   font-family: Inter;
   font-size: 15px;
@@ -41,9 +41,12 @@
   letter-spacing: -0.96px;
 }
 
-.guide img,
-.schedule img {
+.user-guide img {
   margin: 7px;
+}
+
+.schedule img {
+  margin: 0 10px 3px;
 }
 
 .menu {
