@@ -190,7 +190,7 @@ const Register = () => {
 
   function hasEmptyString(obj) {
     for (let key in obj) {
-      if (key !== "address" && obj.hasOwnProperty(key) && obj[key] === "") {
+      if (key !== "address" && obj.prototype.hasOwnProperty.call(key) && obj[key] === "") {
         return true;
       }
     }

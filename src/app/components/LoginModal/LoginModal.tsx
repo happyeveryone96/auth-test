@@ -87,8 +87,8 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, close }) => {
   };
 
   function hasEmptyString(obj: any) {
-    for (let key in obj) {
-      if (obj.hasOwnProperty(key) && obj[key] === "") {
+    for (const key in obj) {
+      if (obj.prototype.hasOwnProperty.call(key) && obj[key] === "") {
         return true;
       }
     }

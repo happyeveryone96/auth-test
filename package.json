@@ -55,19 +55,10 @@
     ]
   },
   "devDependencies": {
-    "@types/bootstrap": "^5.2.6",
-    "@types/react-bootstrap": "^0.32.32",
     "@typescript-eslint/eslint-plugin": "^6.1.0",
     "@typescript-eslint/parser": "^6.1.0",
     "eslint": "^8.45.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-typescript": "^17.1.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
     "miragejs": "^0.1.47",
     "prettier": "^3.0.0",
     "typescript": "^5.1.6"

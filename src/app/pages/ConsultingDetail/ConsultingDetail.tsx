@@ -29,7 +29,7 @@ const ConsultingDetail = () => {
       <div className="banner">
         <div className="container">
           <h1>{title}</h1>
-          <div className={css["profile-box"]}>
+          <div className={css['profile-box']}>
             <Link to={`/profile/${authorId}`}>
               <img
                 className={css["author-profile-img"]}
