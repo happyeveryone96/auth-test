@@ -126,7 +126,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="nav-container-right">
-            <div className="guide">
+            <div className="user-guide">
               <span>
                 <img src="/images/guide.png" alt="이용자 가이드" />
                 이용자 가이드
