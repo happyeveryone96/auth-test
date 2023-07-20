@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Tag from "app/components/Tag/Tag";
-import TAG_DATA from "app/data/tagData";
-import css from "app/components/Tags/Tags.module.css";
+import React, { useState, useEffect } from 'react';
+import Tag from 'app/components/Tag/Tag';
+import TAG_DATA from 'app/data/tagData';
+import css from 'app/components/Tags/Tags.module.css';
 
 interface TagType {
   id: number;

@@ -1,14 +1,14 @@
-import React, { useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import "./LoginModal.css";
-import { clearMessage } from "app/slices/message";
-import FormField from "../FormField/FormField";
-import { Form, Formik } from "formik";
-import { login, socialLogin } from "app/slices/auth";
-import * as Yup from "yup";
-import { useDispatch, useSelector } from "react-redux";
-import qs from "qs";
-import { AppDispatch } from "app/store";
+import React, { useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import './LoginModal.css';
+import { clearMessage } from 'app/slices/message';
+import FormField from '../FormField/FormField';
+import { Form, Formik } from 'formik';
+import { login, socialLogin } from 'app/slices/auth';
+import * as Yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import qs from 'qs';
+import { AppDispatch } from 'app/store';
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -38,10 +38,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, close }) => {
   useEffect(() => {
     dispatch(clearMessage());
     if (query.accessToken) {
-      localStorage.setItem("accessToken", accessTokenFromSocialLogin as string);
+      localStorage.setItem('accessToken', accessTokenFromSocialLogin as string);
       localStorage.setItem(
-        "refreshToken",
-        refreshTokenFromSocialLogin as string
+        'refreshToken',
+        refreshTokenFromSocialLogin as string,
       );
       dispatch(socialLogin(query.accessToken));
     }
@@ -53,18 +53,18 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, close }) => {
   ]);
 
   const initialValues = {
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().required("이메일을 입력해주세요."),
+    email: Yup.string().required('이메일을 입력해주세요.'),
     password: Yup.string()
-      .required("비밀번호를 입력해주세요.")
-      .min(8, "비밀번호는 최소 8자리 이상 입력해주세요.")
+      .required('비밀번호를 입력해주세요.')
+      .min(8, '비밀번호는 최소 8자리 이상 입력해주세요.')
       .test(
-        "password",
-        "비밀번호는 문자, 숫자, 특수문자를 모두 포함해야 합니다.",
+        'password',
+        '비밀번호는 문자, 숫자, 특수문자를 모두 포함해야 합니다.',
         (value: string) => {
           const optionalSpeciesCount = [
             /[A-Z]/.test(value),
@@ -78,7 +78,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, close }) => {
           ].filter(Boolean).length;
 
           return optionalSpeciesCount >= 1 && essentialSpeciesCount === 2;
-        }
+        },
       ),
   });
 
@@ -88,7 +88,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, close }) => {
 
   function hasEmptyString(obj: any) {
     for (const key in obj) {
-      if (obj.prototype.hasOwnProperty.call(key) && obj[key] === "") {
+      if (obj.prototype.hasOwnProperty.call(key) && obj[key] === '') {
         return true;
       }
     }
@@ -97,14 +97,14 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, close }) => {
 
   const handleLogin = (
     formValue: { email: string; password: string },
-    errors: any
+    errors: any,
   ) => {
     const { email, password } = formValue;
     if (!isObjectEmpty(errors) && !hasEmptyString(formValue)) {
       dispatch(login({ email, password }))
         .unwrap()
         .then(() => {
-          navigate("/");
+          navigate('/');
           close();
         })
         .catch((err: any) => console.log(err));

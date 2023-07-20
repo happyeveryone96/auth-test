@@ -1,8 +1,8 @@
-import { instance } from "app/instance/axios.instance";
+import { instance } from 'app/instance/axios.instance';
 
 const getUserProfile = (accessToken: string) => {
   return instance
-    .get("user", {
+    .get('user', {
       headers: {
         Authorization: accessToken ? `Bearer ${accessToken}` : accessToken,
       },
@@ -15,11 +15,11 @@ const getUserProfile = (accessToken: string) => {
 const editProfile = (
   username: string,
   password: string,
-  accessToken: string
+  accessToken: string,
 ) => {
   return instance
     .put(
-      "user",
+      'user',
       {
         username,
         password,
@@ -28,12 +28,12 @@ const editProfile = (
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-      }
+      },
     )
     .then((response) => {
       const { username } = response.data;
       if (response.status === 200) {
-        localStorage.setItem("username", username);
+        localStorage.setItem('username', username);
       }
       return response.data;
     });

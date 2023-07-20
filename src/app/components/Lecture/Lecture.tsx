@@ -1,6 +1,6 @@
-import React from "react";
-import css from "app/components/Lecture/Lecture.module.css";
-import { Link } from "react-router-dom";
+import React from 'react';
+import css from 'app/components/Lecture/Lecture.module.css';
+import { Link } from 'react-router-dom';
 
 interface LectureType {
   lecture: {
@@ -20,22 +20,22 @@ const Lecture = (props: LectureType) => {
     props.lecture;
 
   return (
-    <div className={css["lecture-container"]}>
+    <div className={css['lecture-container']}>
       <div className="article-preview">
-        <div className={css["profile"]}>
-          <div className={css["profile-box"]}>
+        <div className={css['profile']}>
+          <div className={css['profile-box']}>
             <Link to={`/profile/${authorId}`}>
               <img
-                className={css["author-profile-img"]}
+                className={css['author-profile-img']}
                 src={authorImage}
                 alt="강사 프로필 사진"
               />
             </Link>
-            <div className={css["author-box"]}>
-              <Link className={css["author"]} to={`/profile/${authorId}`}>
+            <div className={css['author-box']}>
+              <Link className={css['author']} to={`/profile/${authorId}`}>
                 {authorName}
               </Link>
-              <div className={css["date"]}>{createdAt}</div>
+              <div className={css['date']}>{createdAt}</div>
             </div>
           </div>
         </div>

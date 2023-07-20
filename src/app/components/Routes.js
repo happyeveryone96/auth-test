@@ -1,17 +1,17 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-import Register from "app/pages/Register/Register";
-import Home from "app/pages/Home/Home";
-import Settings from "app/pages/Settings/Settings";
-import LectureDetail from "app/pages/LectureDetail/LectureDetail";
-import ConsultingPage from "app/pages/ConsultingPage/ConsultingPage";
-import ConsultingDetail from "app/pages/ConsultingDetail/ConsultingDetail";
-import MentorPage from "app/pages/MentorPage/MentorPage";
-import MentorDetail from "app/pages/MentorDetail/MentorDetail";
-import FindId from "app/pages/FindId/FindId";
-import FindPassword from "app/pages/FindPassword/FindPassword";
-import LecturePage from "app/pages/LecturePage/LecturePage";
+import Register from 'app/pages/Register/Register';
+import Home from 'app/pages/Home/Home';
+import Settings from 'app/pages/Settings/Settings';
+import LectureDetail from 'app/pages/LectureDetail/LectureDetail';
+import ConsultingPage from 'app/pages/ConsultingPage/ConsultingPage';
+import ConsultingDetail from 'app/pages/ConsultingDetail/ConsultingDetail';
+import MentorPage from 'app/pages/MentorPage/MentorPage';
+import MentorDetail from 'app/pages/MentorDetail/MentorDetail';
+import FindId from 'app/pages/FindId/FindId';
+import FindPassword from 'app/pages/FindPassword/FindPassword';
+import LecturePage from 'app/pages/LecturePage/LecturePage';
 
 const MainRouter = () => {
   return (
