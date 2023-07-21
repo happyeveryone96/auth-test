@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 
-import { clearMessage } from "app/slices/message";
+import { clearMessage } from 'app/slices/message';
 
-import FormField from "app/components/FormField/FormField";
-import "app/pages/FindPassword/FindPassword.css";
+import FormField from 'app/components/FormField/FormField';
+import 'app/pages/FindPassword/FindPassword.css';
 
 interface MessageType {
   message: {
@@ -23,20 +23,20 @@ const FindPassword = () => {
   }, [dispatch]);
 
   const initialValues = {
-    phoneNumber: "",
-    email: "",
+    phoneNumber: '',
+    email: '',
   };
 
   const validationSchema = Yup.object().shape({
     phoneNumber: Yup.string()
-      .required("휴대폰 번호를 입력해주세요.")
+      .required('휴대폰 번호를 입력해주세요.')
       .matches(
         /^(010)[0-9]{3,4}[0-9]{4}$/,
-        "유효하지 않은 휴대폰 번호 형식입니다."
+        '유효하지 않은 휴대폰 번호 형식입니다.',
       ),
     email: Yup.string()
-      .email("이메일 형식에 맞지 않습니다.")
-      .required("이메일을 입력해주세요."),
+      .email('이메일 형식에 맞지 않습니다.')
+      .required('이메일을 입력해주세요.'),
   });
 
   return (

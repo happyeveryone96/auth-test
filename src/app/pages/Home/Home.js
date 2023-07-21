@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
-import UserService from "app/services/user.service";
-import { useSelector } from "react-redux";
-import "app/pages/Home/Home.css";
-import Tags from "app/components/Tags/Tags";
-import Carousel from "react-bootstrap/Carousel";
-import Card from "react-bootstrap/Card";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import React, { useEffect } from 'react';
+import UserService from 'app/services/user.service';
+import { useSelector } from 'react-redux';
+import 'app/pages/Home/Home.css';
+import Tags from 'app/components/Tags/Tags';
+import Carousel from 'react-bootstrap/Carousel';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Home = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  const userName = localStorage.getItem("username");
+  const accessToken = localStorage.getItem('accessToken');
+  const userName = localStorage.getItem('username');
 
   const { isLoggedIn } = useSelector((state) => state.auth);
 
@@ -21,7 +21,7 @@ const Home = () => {
           if (response.status === 200) {
             const { username } = response.data;
             if (!userName) {
-              localStorage.setItem("username", username);
+              localStorage.setItem('username', username);
             }
           }
         })
@@ -34,51 +34,51 @@ const Home = () => {
   const cardData = [
     {
       id: 1,
-      image: "/images/lectureSampleImage.png",
-      title: "Card 1",
-      content: "This is the content of card 1.",
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 1',
+      content: 'This is the content of card 1.',
     },
     {
       id: 2,
-      image: "/images/lectureSampleImage.png",
-      title: "Card 2",
-      content: "This is the content of card 2.",
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 2',
+      content: 'This is the content of card 2.',
     },
     {
       id: 3,
-      image: "/images/lectureSampleImage.png",
-      title: "Card 3",
-      content: "This is the content of card 3.",
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 3',
+      content: 'This is the content of card 3.',
     },
     {
       id: 4,
-      image: "/images/lectureSampleImage.png",
-      title: "Card 4",
-      content: "This is the content of card 4.",
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 4',
+      content: 'This is the content of card 4.',
     },
     {
       id: 5,
-      image: "/images/lectureSampleImage.png",
-      title: "Card 5",
-      content: "This is the content of card 1.",
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 5',
+      content: 'This is the content of card 1.',
     },
     {
       id: 6,
-      image: "/images/lectureSampleImage.png",
-      title: "Card 6",
-      content: "This is the content of card 2.",
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 6',
+      content: 'This is the content of card 2.',
     },
     {
       id: 7,
-      image: "/images/lectureSampleImage.png",
-      title: "Card 7",
-      content: "This is the content of card 3.",
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 7',
+      content: 'This is the content of card 3.',
     },
     {
       id: 8,
-      image: "/images/lectureSampleImage.png",
-      title: "Card 8",
-      content: "This is the content of card 4.",
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 8',
+      content: 'This is the content of card 4.',
     },
   ];
 

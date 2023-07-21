@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import Consulting from "app/components/Consulting/Consulting";
-import CONSULTING_DATA from "app/data/consultingData";
+import React, { useState, useEffect } from 'react';
+import Consulting from 'app/components/Consulting/Consulting';
+import CONSULTING_DATA from 'app/data/consultingData';
 
 interface ConsultingData {
   id: number;

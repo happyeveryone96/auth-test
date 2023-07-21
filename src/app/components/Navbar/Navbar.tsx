@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { reset } from "app/slices/auth";
-import { logout } from "app/slices/auth";
-import { useLocation } from "react-router-dom";
-import LoginModal from "app/components/LoginModal/LoginModal";
-import "app/components/Navbar/Navbar.css";
-import { AppDispatch } from "app/store";
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { reset } from 'app/slices/auth';
+import { logout } from 'app/slices/auth';
+import { useLocation } from 'react-router-dom';
+import LoginModal from 'app/components/LoginModal/LoginModal';
+import 'app/components/Navbar/Navbar.css';
+import { AppDispatch } from 'app/store';
 
 interface AuthState {
   auth: {
@@ -16,15 +16,15 @@ interface AuthState {
 }
 
 const Navbar = () => {
-  const refreshToken = localStorage.getItem("refreshToken");
-  const accessToken = localStorage.getItem("accessToken");
+  const refreshToken = localStorage.getItem('refreshToken');
+  const accessToken = localStorage.getItem('accessToken');
 
   const location = useLocation();
   const { pathname } = location;
-  const isLecturePage = pathname === "/lecture";
-  const isSettingPage = pathname === "/settings";
-  const isConsultingPage = pathname === "/consulting";
-  const isMentorPage = pathname === "/mentor";
+  const isLecturePage = pathname === '/lecture';
+  const isSettingPage = pathname === '/settings';
+  const isConsultingPage = pathname === '/consulting';
+  const isMentorPage = pathname === '/mentor';
 
   const { isLoggedIn } = useSelector((state: AuthState) => state.auth);
 
@@ -56,7 +56,7 @@ const Navbar = () => {
       <div className="nav-top">
         <div className="nav-top-left">
           <div>
-            <Link to={"/"} className="navbar-brand">
+            <Link to={'/'} className="navbar-brand">
               GPTUs
             </Link>
           </div>
@@ -94,20 +94,20 @@ const Navbar = () => {
             </div>
             <div className="nav-container-center">
               <Link
-                to={"/lecture"}
-                className={`nav-link ${isLecturePage && "selected"}`}
+                to={'/lecture'}
+                className={`nav-link ${isLecturePage && 'selected'}`}
               >
                 강의
               </Link>
               <Link
-                to={"/consulting"}
-                className={`nav-link ${isConsultingPage && "selected"}`}
+                to={'/consulting'}
+                className={`nav-link ${isConsultingPage && 'selected'}`}
               >
                 상담
               </Link>
               <Link
-                to={"/mentor"}
-                className={`nav-link ${isMentorPage && "selected"}`}
+                to={'/mentor'}
+                className={`nav-link ${isMentorPage && 'selected'}`}
               >
                 강사
               </Link>
@@ -117,8 +117,8 @@ const Navbar = () => {
 
               {isLoggedIn && (
                 <Link
-                  to={"/settings"}
-                  className={`nav-link ${isSettingPage && "selected"}`}
+                  to={'/settings'}
+                  className={`nav-link ${isSettingPage && 'selected'}`}
                 >
                   내정보
                 </Link>

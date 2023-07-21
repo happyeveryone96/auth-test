@@ -1,5 +1,5 @@
-import React from "react";
-import css from "app/components/Tag/Tag.module.css";
+import React from 'react';
+import css from 'app/components/Tag/Tag.module.css';
 
 interface TagType {
   tag: string;

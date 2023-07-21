@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from "react";
-import UserService from "app/services/user.service";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
-import { reset } from "app/slices/auth";
+import React, { useState, useEffect } from 'react';
+import UserService from 'app/services/user.service';
+import { useDispatch, useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
+import { reset } from 'app/slices/auth';
 
-import FormField from "app/components/FormField/FormField";
+import FormField from 'app/components/FormField/FormField';
 
-import { editProfile } from "app/slices/auth";
-import { clearMessage } from "app/slices/message";
+import { editProfile } from 'app/slices/auth';
+import { clearMessage } from 'app/slices/message';
 
-import "app/pages/Settings/Settings.css";
+import 'app/pages/Settings/Settings.css';
 
 const Settings = () => {
-  const accessToken = localStorage.getItem("accessToken");
+  const accessToken = localStorage.getItem('accessToken');
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -46,16 +46,16 @@ const Settings = () => {
   }, [dispatch]);
 
   const initialValues = {
-    profileImg: "",
+    profileImg: '',
     username: username || name,
-    shortBio: "",
+    shortBio: '',
     email,
-    password: "",
+    password: '',
   };
 
   const validationSchema = Yup.object().shape({
-    username: Yup.string().required("This field is required!"),
-    password: Yup.string().required("This field is required!"),
+    username: Yup.string().required('This field is required!'),
+    password: Yup.string().required('This field is required!'),
   });
 
   const handleEditProfile = (formValue) => {
