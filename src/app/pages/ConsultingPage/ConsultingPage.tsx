@@ -10,6 +10,10 @@ interface ConsultingData {
   title: string;
   body: string;
   createdAt: string;
+  like: number;
+  views: number;
+  comment: number;
+  solved: boolean;
 }
 
 const ConsultingPage = () => {
