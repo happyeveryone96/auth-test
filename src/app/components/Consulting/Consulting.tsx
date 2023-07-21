@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import css from 'app/components/Consulting/Consulting.module.css';
+import { Like, Views, Comment } from './Icons';
+import { Solved, UnSolved } from './Solved';
 
 interface ConsultingType {
   consulting: {
@@ -11,16 +13,38 @@ interface ConsultingType {
     createdAt: string;
     body: string;
     title: string;
+    like: number;
+    views: number;
+    comment: number;
+    solved: boolean;
   };
 }
 
 const Consulting = (props: ConsultingType) => {
-  const { id, authorId, authorImage, authorName, createdAt, body, title } =
-    props.consulting;
+  const {
+    id,
+    authorId,
+    authorImage,
+    authorName,
+    createdAt,
+    body,
+    title,
+    like,
+    comment,
+    views,
+    solved,
+  } = props.consulting;
 
   return (
     <div className={css['consulting-container']}>
-      <div className="article-preview">
+      <div>
+        <div className={css['title']}>
+          {solved ? <Solved /> : <UnSolved />}
+          <Link to={`/consulting/${id}`} className={css['consulting-preview']}>
+            <h5>{title}</h5>
+          </Link>
+        </div>
+        <p>{body}</p>
         <div className={css['profile']}>
           <div className={css['profile-box']}>
             <Link to={`/profile/${authorId}`}>
@@ -34,16 +58,25 @@ const Consulting = (props: ConsultingType) => {
               <Link className={css['author']} to={`/profile/${authorId}`}>
                 {authorName}
               </Link>
-              <div className={css['date']}>{createdAt}</div>
             </div>
+            <div className={css['date']}>{createdAt}</div>
+          </div>
+          <div className={css['reactions']}>
+            <div className={css['reaction']}>
+              <Like />
+              {like}
+            </div>
+            <div className={css['reaction']}>
+              <Views />
+              {views}
+            </div>
+            <div className={css['reaction']}>
+              <Comment />
+              {comment}
+            </div>
+            <div>{solved}</div>
           </div>
         </div>
-
-        <Link to={`/consulting/${id}`} className="preview-link">
-          <h1>{title}</h1>
-          <p>{body}</p>
-          <span>Read more...</span>
-        </Link>
       </div>
     </div>
   );
