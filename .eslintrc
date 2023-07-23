@@ -30,3 +30,23 @@
     "@typescript-eslint/no-explicit-any": ["off"]
   }
 }
+
+// {
+//   "parser": "@typescript-eslint/parser",
+//   "parserOptions": {
+//     "ecmaVersion": 2020, // Assumes you are using ECMAScript 2020 features
+//     "sourceType": "module",
+//     "project": "./tsconfig.json" // Path to your tsconfig.json file
+//   },
+//   "plugins": ["@typescript-eslint"],
+//   "extends": [
+//     "eslint:recommended",
+//     "plugin:@typescript-eslint/recommended",
+//     "eslint-config-prettier",
+//     "plugin:prettier/recommended"
+//   ],
+//   "rules": {
+//     "@typescript-eslint/no-unsafe-assignment": ["off"],
+//     "@typescript-eslint/no-explicit-any": ["off"]
+//   }
+// }
