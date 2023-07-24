@@ -2,6 +2,7 @@ const CONSULTING_DATA = [
   {
     id: 1,
     authorId: 1,
+    kindof: 'tech', // 기술 상담인지 고민 상담인지
     authorName: '수강생1',
     authorImage: 'https://dummyimage.com/100.png/09f/fff',
     title: '여기서 질문있습니다',
@@ -10,11 +11,12 @@ const CONSULTING_DATA = [
     like: 800,
     views: 300,
     comment: 6,
-    solved: true,
+    solved: true, // 해결 된 상담인지 아닌지
   },
   {
     id: 2,
     authorId: 2,
+    kindof: 'worry',
     authorName: '수강생2',
     authorImage: 'https://dummyimage.com/100.png/09f/fff',
     title:
@@ -29,6 +31,7 @@ const CONSULTING_DATA = [
   {
     id: 3,
     authorId: 3,
+    kindof: 'tech',
     authorName: '수강생3',
     authorImage: 'https://dummyimage.com/100.png/09f/fff',
     title:
@@ -43,6 +46,7 @@ const CONSULTING_DATA = [
   {
     id: 4,
     authorId: 4,
+    kindof: 'worry',
     authorName: '수강생4',
     authorImage: 'https://dummyimage.com/100.png/09f/fff',
     title:
