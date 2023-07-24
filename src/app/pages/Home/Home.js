@@ -322,7 +322,7 @@ const Home = () => {
           <div className="card">
             <img
               src="/images/lectureSampleImage.png"
-              class="card-img-top"
+              className="card-img-top"
               alt="강의 샘플 이미지"
             />
             <div className="card-body">
@@ -340,7 +340,7 @@ const Home = () => {
           <div className="card">
             <img
               src="/images/lectureSampleImage.png"
-              class="card-img-top"
+              className="card-img-top"
               alt="강의 샘플 이미지"
             />
             <div className="card-body">
@@ -357,7 +357,7 @@ const Home = () => {
           <div className="card">
             <img
               src="/images/lectureSampleImage.png"
-              class="card-img-top"
+              className="card-img-top"
               alt="강의 샘플 이미지"
             />
             <div className="card-body">
@@ -375,7 +375,7 @@ const Home = () => {
           <div className="card">
             <img
               src="/images/lectureSampleImage.png"
-              class="card-img-top"
+              className="card-img-top"
               alt="강의 샘플 이미지"
             />
             <div className="card-body">
