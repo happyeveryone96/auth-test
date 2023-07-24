@@ -13,6 +13,7 @@ interface ConsultingType {
     createdAt: string;
     body: string;
     title: string;
+    kindof: string;
     like: number;
     views: number;
     comment: number;
