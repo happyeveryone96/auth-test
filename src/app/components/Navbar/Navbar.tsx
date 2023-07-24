@@ -70,7 +70,7 @@ const Navbar = () => {
     checkMouseDirection(e);
   };
 
-  const checkMouseDirection = (e: any) => {
+  const checkMouseDirection = (e: React.MouseEvent) => {
     const currentMouseY = e.clientY;
     if (currentMouseY > prevMouseY) {
       setIsMouseOver(true);
