@@ -1,0 +1,30 @@
+.wrapper {
+  width: 315px;
+  height: 412px;
+  border-radius: 8px;
+  padding: 21px;
+  border: 1px solid #d8d8d8;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.content {
+  display: flex;
+  width: 273px;
+  height: 21px;
+  justify-content: space-between;
+  padding: 6px 0px 6px 0px;
+  font-size: 13px;
+}
+
+.createdAt {
+  color: #b3b3b3;
+}
+
+.tab-button {
+  border: none;
+  background-color: white;
+}
