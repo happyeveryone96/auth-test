@@ -7,6 +7,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import SlideBanner from 'app/components/SlideBanner/SlideBanner';
 
 const Home = () => {
   const accessToken = localStorage.getItem('accessToken');
@@ -94,24 +95,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <div className="banner">
-        <div className="container">
-          <div className="banner-box">
-            아이부터 할아버지까지
-            <br /> 삶에 필요한 개인 맞춤형 학습컨텐츠
-          </div>
-          <div className="banner-box">
-            <img src="/images/banner.png" alt="배너 이미지" />
-          </div>
-        </div>
-      </div>
-
-      <div className="sub-nav">
-        <div className="tab">생애주기 별 맞춤형 교육과정</div>
-        <div className="tab">친구들과 함께 즐기는 놀이터</div>
-        <div className="tab">전문가의 트레이닝 및 코칭</div>
-      </div>
-
+      <SlideBanner />
       <div className="statistics">
         <div className="left-box">
           <div className="learning-guide">학습 가이드</div>
