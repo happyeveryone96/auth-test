@@ -102,6 +102,14 @@
   margin-left: 104px;
 }
 
+.navbar {
+  width: 100vw;
+  border-top: 1px solid #e0e0e0;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
 .navbar-brand {
   color: #41a24b;
   font-family: NanumGothic;
@@ -171,4 +179,49 @@
   font-weight: 500;
   line-height: 28px;
   letter-spacing: -0.96px;
+}
+
+.sub-lecture-container {
+  display: flex;
+  width: 100vw;
+  height: 254px;
+  padding: 0 180px;
+  background-color: white;
+  position: absolute;
+  justify-content: center;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.lecture,
+.foundation,
+.employment,
+.hobby,
+.school-learning,
+.university {
+  width: 16.6%;
+  margin-right: 30px;
+  width: fit-content;
+  padding: 37px 43px 37px 20px;
+  border-right: 1px solid #e0e0e0;
+}
+
+.lecture-text {
+  color: #7e7e7e;
+  font-size: 12px;
+  margin-top: 12px;
+  font-weight: 350;
+}
+
+.category-title {
+  font-weight: 500;
+}
+
+.category-list {
+  color: #848484;
+  margin: 10px 0;
+}
+
+.category-list:hover {
+  color: #41a24b;
+  cursor: pointer;
 }
