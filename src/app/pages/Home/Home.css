@@ -25,25 +25,6 @@
   letter-spacing: -1.96px;
 }
 
-.sub-nav {
-  height: 67px;
-  background-color: rgb(43, 114, 46);
-  display: flex;
-  align-items: center;
-}
-
-.tab {
-  width: 33.3%;
-  display: flex;
-  justify-content: center;
-  color: #fff;
-  font-family: Inter;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 34px;
-  letter-spacing: -0.96px;
-}
-
 .statistics {
   display: flex;
   justify-content: space-around;
@@ -51,15 +32,14 @@
 }
 
 .slogan {
-  color: #41a24b;
-  font-family: Inter;
-  width: 299px;
-  height: 76px;
-  font-size: 36px;
-  font-weight: 700;
-  line-height: 38px;
-  letter-spacing: -1.96px;
-  margin-bottom: 12px;
+  color: #373737;
+  font-family: Noto Sans KR;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 40px;
+  letter-spacing: -2.833px;
+  margin-bottom: 19px;
 }
 
 .slogan-kr {
@@ -97,81 +77,57 @@
   line-height: 47.5px;
 }
 
-.main-input {
-  display: flex;
-  margin: 33px auto 0;
-  width: 1070px;
-  height: 69px;
-  flex-shrink: 0;
-  border-radius: 999px;
-  border: 1px solid #d7d7d7;
-  background: #fff;
-  padding-left: 30px;
-  outline: none;
-}
-
-.tags {
-  display: flex;
-  justify-content: space-around;
-  width: 1200px;
-  margin: 33px auto 0;
-}
-
-.best-tags {
-  color: #41a24b;
+.learning-order {
+  display: inline-flex;
+  height: 26px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  position: absolute;
+  z-index: 1;
+  margin-bottom: 160px;
+  background-color: white;
+  color: #1f1f1f;
   font-family: Noto Sans KR;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 350;
   letter-spacing: -0.27px;
 }
 
-.tag {
-  width: 152px;
-  height: 37px;
-  color: #41a24b;
-  border-radius: 100px;
-  border: 1px solid #41a24b;
-  margin: 0 5px;
-}
-
-.down {
-  display: flex;
-  justify-content: center;
-  margin: 76px 0 117.3px;
-}
-
 .guide {
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
+.category-box {
+  margin-top: 60px;
+  border-radius: 17px;
+  padding: 0 200px;
+  border: 1px solid #d4d4d4;
+}
+
 .learning-guide {
   color: #f83e3e;
   font-family: Noto Sans KR;
   font-weight: 700;
   letter-spacing: -0.24px;
+  margin-bottom: 19px;
 }
-.learning-order {
-  color: #1f1f1f;
-  font-family: Noto Sans KR;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.33px;
-  margin: 17px 0;
-}
-.category {
-  color: #000;
-  font-family: Noto Sans KR;
-  font-size: 18px;
-  letter-spacing: -0.27px;
-}
+
 .category-box {
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 1094px;
   height: 169px;
-  flex-shrink: 0;
+}
+
+.category-box img {
+  position: relative;
+  top: 20px;
 }
 
 .category-text {
@@ -180,7 +136,7 @@
   font-size: 18px;
   letter-spacing: -0.27px;
   text-align: center;
-  margin-top: 14px;
+  margin-top: 30px;
 }
 
 .card-deck {
@@ -198,6 +154,7 @@
   border-radius: 10px;
   background: #def1d2;
 }
+
 .apply-tutor-text {
   color: #000;
   font-family: Inter;
@@ -205,6 +162,7 @@
   font-weight: 500;
   letter-spacing: -0.96px;
 }
+
 .apply {
   color: #000;
   font-family: Inter;
@@ -240,11 +198,13 @@
   letter-spacing: -0.33px;
   margin: 7px 0;
 }
+
 .new-lecture-box,
 .hot-lecture-box {
   display: flex;
   justify-content: space-between;
 }
+
 .last-week-best {
   color: #1f1f1f;
   font-family: Noto Sans KR;
@@ -253,6 +213,7 @@
   line-height: normal;
   letter-spacing: -0.24px;
 }
+
 .lecture-num {
   color: #5f5f5f;
   display: flex;
@@ -268,4 +229,41 @@
 .hot-lecture,
 .mentoring-board {
   margin-top: 97px;
+}
+
+.carousel-card {
+  width: 249px;
+  height: 312px;
+  padding: 0;
+  background-color: white;
+  border: 0;
+}
+
+.card-img {
+  width: 249px;
+  height: 140px;
+}
+
+.carousel-card .card-body {
+  background-color: white;
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 48px;
+  padding: 10px;
+  z-index: 100;
+  color: #949494;
+  background-color: white;
+}
+
+.carousel-control-prev-icon {
+  position: relative;
+  right: 100px;
+  margin-right: 100px;
+}
+
+.lecture-img {
+  padding-right: 3px;
 }

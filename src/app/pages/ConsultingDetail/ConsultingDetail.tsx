@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import LECTURE_DETAIL_DATA from "app/data/lectureDetailData";
-import css from "app/pages/ConsultingDetail/ConsultingDetail.module.css";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import LECTURE_DETAIL_DATA from 'app/data/lectureDetailData';
+import css from 'app/pages/ConsultingDetail/ConsultingDetail.module.css';
 
 interface LectureDetailData {
   authorId: number;
@@ -29,15 +29,15 @@ const ConsultingDetail = () => {
       <div className="banner">
         <div className="container">
           <h1>{title}</h1>
-          <div className={css["profile-box"]}>
+          <div className={css['profile-box']}>
             <Link to={`/profile/${authorId}`}>
               <img
-                className={css["author-profile-img"]}
+                className={css['author-profile-img']}
                 src={authorImage}
                 alt="강사 프로필 사진"
               />
             </Link>
-            <div className={css["author-box"]}>
+            <div className={css['author-box']}>
               <Link className="author" to={`/profile/${authorId}`}>
                 {authorName}
               </Link>

@@ -1,11 +1,19 @@
-import React, { useEffect } from "react";
-import UserService from "app/services/user.service";
-import { useSelector } from "react-redux";
-import "app/pages/Home/Home.css";
+import React, { useEffect } from 'react';
+import UserService from 'app/services/user.service';
+import { useSelector } from 'react-redux';
+import 'app/pages/Home/Home.css';
+import Tags from 'app/components/Tags/Tags';
+import Carousel from 'react-bootstrap/Carousel';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import SlideBanner from 'app/components/SlideBanner/SlideBanner';
+// import { Link } from 'react-router-dom';
+import DummyCard from 'app/components/DummyCard/DummyCard.tsx';
 
 const Home = () => {
-  const accessToken = localStorage.getItem("accessToken");
-  const userName = localStorage.getItem("username");
+  const accessToken = localStorage.getItem('accessToken');
+  const userName = localStorage.getItem('username');
 
   const { isLoggedIn } = useSelector((state) => state.auth);
 
@@ -16,7 +24,7 @@ const Home = () => {
           if (response.status === 200) {
             const { username } = response.data;
             if (!userName) {
-              localStorage.setItem("username", username);
+              localStorage.setItem('username', username);
             }
           }
         })
@@ -26,29 +34,77 @@ const Home = () => {
     }
   }, [userName, accessToken, isLoggedIn]);
 
+  const cardData = [
+    {
+      id: 1,
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 1',
+      content: 'This is the content of card 1.',
+    },
+    {
+      id: 2,
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 2',
+      content: 'This is the content of card 2.',
+    },
+    {
+      id: 3,
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 3',
+      content: 'This is the content of card 3.',
+    },
+    {
+      id: 4,
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 4',
+      content: 'This is the content of card 4.',
+    },
+    {
+      id: 5,
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 5',
+      content: 'This is the content of card 1.',
+    },
+    {
+      id: 6,
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 6',
+      content: 'This is the content of card 2.',
+    },
+    {
+      id: 7,
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 7',
+      content: 'This is the content of card 3.',
+    },
+    {
+      id: 8,
+      image: '/images/lectureSampleImage.png',
+      title: 'Card 8',
+      content: 'This is the content of card 4.',
+    },
+  ];
+
+  const chunkArray = (arr, size) => {
+    const chunkedArr = [];
+    for (let i = 0; i < arr.length; i += size) {
+      chunkedArr.push(arr.slice(i, i + size));
+    }
+    return chunkedArr;
+  };
+
+  const slides = chunkArray(cardData, 4);
+
   return (
     <div className="home">
-      <div className="banner">
-        <div className="container">
-          <div className="banner-box">
-            아이부터 할아버지까지
-            <br /> 삶에 필요한 개인 맞춤형 학습컨텐츠
-          </div>
-          <div className="banner-box">
-            <img src="/images/banner.png" alt="배너 이미지" />
-          </div>
-        </div>
-      </div>
-
-      <div className="sub-nav">
-        <div className="tab">생애주기 별 맞춤형 교육과정</div>
-        <div className="tab">친구들과 함께 즐기는 놀이터</div>
-        <div className="tab">전문가의 트레이닝 및 코칭</div>
-      </div>
-
+      <SlideBanner />
       <div className="statistics">
         <div className="left-box">
-          <div className="slogan">Learning Today, Leading Tomorrow</div>
+          <div className="learning-guide">학습 가이드</div>
+          <div className="slogan">
+            <div>당신의 꿈은 무엇입니까?</div>
+            <div>공부를 왜 하나요?</div>
+          </div>
           <div className="slogan-kr">
             미련하게 배우는 시대는 갔습니다. 스마트하게 인공지능 리터러시를
             키워야 합니다.
@@ -74,43 +130,9 @@ const Home = () => {
         </div>
       </div>
 
-      <input className="main-input" />
-
-      <div className="tags">
-        <div className="best-tags">강의 태그 Best 5</div>
-        <div>
-          <div className="tag">
-            <div># langchain</div>
-            <div>99K</div>
-          </div>
-          <div className="tag">
-            <div># langchain</div>
-            <div>99K</div>
-          </div>
-          <div className="tag">
-            <div># langchain</div>
-            <div>99K</div>
-          </div>
-          <div className="tag">
-            <div># langchain</div>
-            <div>99K</div>
-          </div>
-          <div className="tag">
-            <div># langchain</div>
-            <div>99K</div>
-          </div>
-        </div>
-      </div>
-
-      <div className="down">
-        <img src="/images/down.png" alt="down" />
-      </div>
-
       <div className="guide">
-        <div className="learning-guide">학습 가이드</div>
-        <div className="learning-order">내게 맞는 학습 순서</div>
-        <div className="category">카테고리에 따라 강의를 찾아보세요</div>
         <div className="category-box">
+          <div className="learning-order">내게 맞는 학습 순서</div>
           <div>
             <div>
               <img src="/images/wallet.png" alt="창업" />
@@ -138,111 +160,49 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="card-deck">
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">Card title</h5>
-            <p className="card-text">
-              This is a longer card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </p>
-            <p className="card-text">
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </p>
-          </div>
+      {/* <Tags /> */}
+
+      <div className="new-lecture">
+        <div className="new">NEW</div>
+        <div className="new-lecture-text">신규 런칭 강의</div>
+        <div className="new-lecture-box">
+          <div className="last-week-best">최근 일주일 동안 많이 찾은 강의</div>
+          <div className="lecture-num">1/5</div>
         </div>
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">Card title</h5>
-            <p className="card-text">
-              This card has supporting text below as a natural lead-in to
-              additional content.
-            </p>
-            <p className="card-text">
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </p>
-          </div>
+        <div className="card-deck">
+          <DummyCard />
+          <DummyCard />
+          <DummyCard />
+          <DummyCard />
         </div>
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">Card title</h5>
-            <p className="card-text">
-              This is a wider card with supporting text below as a natural
-              lead-in to additional content. This card has even longer content
-              than the first to show that equal height action.
-            </p>
-            <p className="card-text">
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </p>
-          </div>
-        </div>
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">Card title</h5>
-            <p className="card-text">
-              This is a longer card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </p>
-            <p className="card-text">
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="card-deck">
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">Card title</h5>
-            <p className="card-text">
-              This is a longer card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </p>
-            <p className="card-text">
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </p>
-          </div>
-        </div>
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">Card title</h5>
-            <p className="card-text">
-              This card has supporting text below as a natural lead-in to
-              additional content.
-            </p>
-            <p className="card-text">
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </p>
-          </div>
-        </div>
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">Card title</h5>
-            <p className="card-text">
-              This is a wider card with supporting text below as a natural
-              lead-in to additional content. This card has even longer content
-              than the first to show that equal height action.
-            </p>
-            <p className="card-text">
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </p>
-          </div>
-        </div>
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">Card title</h5>
-            <p className="card-text">
-              This is a longer card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </p>
-            <p className="card-text">
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </p>
-          </div>
-        </div>
+
+        {/* <Carousel
+          nextIcon={<img src="/images/chevronRight.png" alt="다음 버튼" />}
+          prevIcon={<img src="/images/chevronLeft.png" alt="이전 버튼" />}
+        > */}
+        {/* {slides.map((slide, index) => (
+          <Carousel.Item key={index} className="carousel-item">
+            <Row>
+              {slide.map((card) => (
+                <Col key={card.id} md={3} className="col">
+                  <Card className="carousel-card">
+                    <Card.Img
+                      className="card-img"
+                      variant="top"
+                      src={card.image}
+                      alt={card.title}
+                    />
+                    <Card.Body className="card-body">
+                      <Card.Title>{card.title}</Card.Title>
+                      <Card.Text>{card.content}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))}
+            </Row>
+          </Carousel.Item>
+        ))} */}
+        {/* </Carousel> */}
       </div>
 
       <div className="apply-tutor">
@@ -253,88 +213,6 @@ const Home = () => {
         <div className="apply">선생님 신청하기</div>
       </div>
 
-      <div className="new-lecture">
-        <div className="new">NEW</div>
-        <div className="new-lecture-text">신규 런칭 강의</div>
-        <div className="new-lecture-box">
-          <div className="last-week-best">최근 일주일 동안 많이 찾은 강의</div>
-          <div className="lecture-num">1/5</div>
-        </div>
-        <div className="card-deck">
-          <div className="card">
-            <img
-              src="/images/lectureSampleImage.png"
-              class="card-img-top"
-              alt="강의 샘플 이미지"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <img
-              src="/images/lectureSampleImage.png"
-              class="card-img-top"
-              alt="강의 샘플 이미지"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This card has supporting text below as a natural lead-in to
-                additional content.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <img
-              src="/images/lectureSampleImage.png"
-              class="card-img-top"
-              alt="강의 샘플 이미지"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This card has even longer content
-                than the first to show that equal height action.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <img
-              src="/images/lectureSampleImage.png"
-              class="card-img-top"
-              alt="강의 샘플 이미지"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="hot-lecture">
         <div className="hot">Hot</div>
         <div className="hot-lecture-text">인기 급상승 강의</div>
@@ -343,77 +221,10 @@ const Home = () => {
           <div className="lecture-num">1/5</div>
         </div>
         <div className="card-deck">
-          <div className="card">
-            <img
-              src="/images/lectureSampleImage.png"
-              class="card-img-top"
-              alt="강의 샘플 이미지"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <img
-              src="/images/lectureSampleImage.png"
-              class="card-img-top"
-              alt="강의 샘플 이미지"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This card has supporting text below as a natural lead-in to
-                additional content.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <img
-              src="/images/lectureSampleImage.png"
-              class="card-img-top"
-              alt="강의 샘플 이미지"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This card has even longer content
-                than the first to show that equal height action.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <img
-              src="/images/lectureSampleImage.png"
-              class="card-img-top"
-              alt="강의 샘플 이미지"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
+          <DummyCard />
+          <DummyCard />
+          <DummyCard />
+          <DummyCard />
         </div>
       </div>
 
@@ -422,110 +233,10 @@ const Home = () => {
         <div className="mentoring-text">멘토링 게시판</div>
         <div className="last-week-best">최근 일주일 동안 많이 찾은 강의</div>
         <div className="card-deck">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This card has supporting text below as a natural lead-in to
-                additional content.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This card has even longer content
-                than the first to show that equal height action.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className="card-deck">
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This card has supporting text below as a natural lead-in to
-                additional content.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This is a wider card with supporting text below as a natural
-                lead-in to additional content. This card has even longer content
-                than the first to show that equal height action.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
-          <div className="card">
-            <div className="card-body">
-              <h5 className="card-title">Card title</h5>
-              <p className="card-text">
-                This is a longer card with supporting text below as a natural
-                lead-in to additional content. This content is a little bit
-                longer.
-              </p>
-              <p className="card-text">
-                <small className="text-muted">Last updated 3 mins ago</small>
-              </p>
-            </div>
-          </div>
+          <DummyCard />
+          <DummyCard />
+          <DummyCard />
+          <DummyCard />
         </div>
       </div>
     </div>

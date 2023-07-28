@@ -1,9 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import authReducer from "app/slices/auth";
-import messageReducer from "app/slices/message";
-import storage from "redux-persist/lib/storage";
-import { persistReducer } from "redux-persist";
-import { combineReducers } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
+import authReducer from 'app/slices/auth';
+import messageReducer from 'app/slices/message';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
+import { combineReducers } from '@reduxjs/toolkit';
 
 const reducers = combineReducers({
   auth: authReducer,
@@ -11,9 +11,9 @@ const reducers = combineReducers({
 });
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage,
-  whitelist: ["auth"],
+  whitelist: ['auth'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

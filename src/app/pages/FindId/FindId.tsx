@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Formik, Form } from "formik";
-import * as Yup from "yup";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Formik, Form } from 'formik';
+import * as Yup from 'yup';
 
-import { clearMessage } from "app/slices/message";
+import { clearMessage } from 'app/slices/message';
 
-import FormField from "app/components/FormField/FormField";
-import "app/pages/FindId/FindId.css";
+import FormField from 'app/components/FormField/FormField';
+import 'app/pages/FindId/FindId.css';
 
 interface MessageType {
   message: {
@@ -23,23 +23,23 @@ const FindId = () => {
   }, [dispatch]);
 
   const initialValues = {
-    phoneNumber: "",
-    password: "",
+    phoneNumber: '',
+    password: '',
   };
 
   const validationSchema = Yup.object().shape({
     phoneNumber: Yup.string()
-      .required("휴대폰 번호를 입력해주세요.")
+      .required('휴대폰 번호를 입력해주세요.')
       .matches(
         /^(010)[0-9]{3,4}[0-9]{4}$/,
-        "유효하지 않은 휴대폰 번호 형식입니다."
+        '유효하지 않은 휴대폰 번호 형식입니다.',
       ),
     password: Yup.string()
-      .required("비밀번호를 입력해주세요.")
-      .min(8, "비밀번호는 최소 8자리 이상 입력해주세요.")
+      .required('비밀번호를 입력해주세요.')
+      .min(8, '비밀번호는 최소 8자리 이상 입력해주세요.')
       .test(
-        "password",
-        "비밀번호는 문자, 숫자, 특수문자를 모두 포함해야 합니다.",
+        'password',
+        '비밀번호는 문자, 숫자, 특수문자를 모두 포함해야 합니다.',
         (value) => {
           const optionalSpeciesCount = [
             /[A-Z]/.test(value),
@@ -53,7 +53,7 @@ const FindId = () => {
           ].filter(Boolean)?.length;
 
           return optionalSpeciesCount >= 1 && essentialSpeciesCount === 2;
-        }
+        },
       ),
   });
 

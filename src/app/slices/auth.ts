@@ -1,8 +1,8 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { setMessage } from "app/slices/message";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { setMessage } from 'app/slices/message';
 
-import AuthService from "app/services/auth.service";
-import UserService from "app/services/user.service";
+import AuthService from 'app/services/auth.service';
+import UserService from 'app/services/user.service';
 
 interface RegisterType {
   nickname: string;
@@ -34,11 +34,11 @@ interface GetUserInfoType {
   accessToken: string;
 }
 
-const userString = localStorage.getItem("user");
-const user = JSON.parse(userString || "null");
+const userString = localStorage.getItem('user');
+const user = JSON.parse(userString || 'null');
 
 export const register = createAsyncThunk<any, RegisterType>(
-  "auth/register",
+  'auth/register',
   async ({ nickname, email, password }, thunkAPI) => {
     try {
       const response = await AuthService.register(nickname, email, password);
@@ -56,11 +56,11 @@ export const register = createAsyncThunk<any, RegisterType>(
       thunkAPI.dispatch(registerRejected());
       return thunkAPI.rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const login = createAsyncThunk<any, LoginType>(
-  "auth/login",
+  'auth/login',
   async ({ email, password }, thunkAPI) => {
     try {
       const data = await AuthService.login(email, password);
@@ -77,11 +77,11 @@ export const login = createAsyncThunk<any, LoginType>(
       thunkAPI.dispatch(loginRejected());
       return thunkAPI.rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const socialLogin = createAsyncThunk<any, any>(
-  "auth/socailLogin",
+  'auth/socailLogin',
   async (accessToken, thunkAPI) => {
     try {
       const data = await UserService.getUserProfile(accessToken);
@@ -98,17 +98,17 @@ export const socialLogin = createAsyncThunk<any, any>(
       thunkAPI.dispatch(socialLoginRejected());
       return thunkAPI.rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const editProfile = createAsyncThunk<any, EditProfileType>(
-  "auth/edit",
+  'auth/edit',
   async ({ username, password, accessToken }, thunkAPI) => {
     try {
       const data = await UserService.editProfile(
         username,
         password,
-        accessToken
+        accessToken,
       );
       return { data };
     } catch (error: any) {
@@ -121,11 +121,11 @@ export const editProfile = createAsyncThunk<any, EditProfileType>(
       thunkAPI.dispatch(setMessage(message));
       return thunkAPI.rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const logout = createAsyncThunk<any, LogoutType>(
-  "auth/logout",
+  'auth/logout',
   async ({ refreshToken, accessToken }, thunkAPI) => {
     try {
       if (refreshToken !== null && accessToken !== null) {
@@ -143,11 +143,11 @@ export const logout = createAsyncThunk<any, LogoutType>(
       thunkAPI.dispatch(logoutRejected());
       return thunkAPI.rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const reissuanceToken = createAsyncThunk<any, ReissuanceTokenType>(
-  "auth/reissuance",
+  'auth/reissuance',
   async ({ refreshToken }, thunkAPI) => {
     try {
       const data = await AuthService.reissuanceToken(refreshToken);
@@ -162,11 +162,11 @@ export const reissuanceToken = createAsyncThunk<any, ReissuanceTokenType>(
       thunkAPI.dispatch(setMessage(message));
       return thunkAPI.rejectWithValue(error);
     }
-  }
+  },
 );
 
 export const getUserInfo = createAsyncThunk<any, GetUserInfoType>(
-  "auth/login",
+  'auth/login',
   async ({ accessToken }, thunkAPI) => {
     try {
       const data = await UserService.getUserProfile(accessToken);
@@ -181,10 +181,10 @@ export const getUserInfo = createAsyncThunk<any, GetUserInfoType>(
       thunkAPI.dispatch(setMessage(message));
       return thunkAPI.rejectWithValue(error);
     }
-  }
+  },
 );
 
-export const reset = createAsyncThunk("auth/reset", async (_, thunkAPI) => {
+export const reset = createAsyncThunk('auth/reset', async (_, thunkAPI) => {
   thunkAPI.dispatch(resetFulfilled());
   return { isLoggedIn: false, user: null };
 });
@@ -199,7 +199,7 @@ const initialState: AuthState = user
   : { isLoggedIn: false, user: null };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     registerFulfilled: (state) => {
@@ -235,6 +235,10 @@ const authSlice = createSlice({
     resetFulfilled: (state) => {
       state.isLoggedIn = false;
       state.user = null;
+    },
+    dummyLoginFulfilled: (state, action) => {
+      state.isLoggedIn = false;
+      // state.user = 'User1';
     },
   },
 });

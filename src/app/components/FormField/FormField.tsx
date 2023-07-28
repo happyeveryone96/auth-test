@@ -1,6 +1,6 @@
-import React from "react";
-import { Field, ErrorMessage } from "formik";
-import "app/components/FormField/FormField.css";
+import React from 'react';
+import { Field, ErrorMessage } from 'formik';
+import 'app/components/FormField/FormField.css';
 
 interface FormFieldType {
   label?: string;
@@ -30,7 +30,7 @@ const FormField = (props: FormFieldType) => {
   const hasValue = value && value.trim().length > 0;
 
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       event.preventDefault();
     }
   };
@@ -47,8 +47,8 @@ const FormField = (props: FormFieldType) => {
           as={as}
           onKeyPress={handleKeyUp}
           className={
-            "form-group form-control form-control-lg" +
-            (isInvalid ? " is-invalid" : "")
+            'form-group form-control form-control-lg' +
+            (isInvalid ? ' is-invalid' : '')
           }
         />
       ) : (
@@ -61,8 +61,8 @@ const FormField = (props: FormFieldType) => {
           onKeyPress={handleKeyUp}
           value={value}
           className={
-            "form-group form-control form-control-lg" +
-            (!hasValue && isInvalid ? " is-invalid" : "")
+            'form-group form-control form-control-lg' +
+            (!hasValue && isInvalid ? ' is-invalid' : '')
           }
         />
       )}

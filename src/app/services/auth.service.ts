@@ -1,8 +1,8 @@
-import { instance } from "app/instance/axios.instance";
-import axios from "axios";
+import { instance } from 'app/instance/axios.instance';
+import axios from 'axios';
 
 const register = (nickname: string, email: string, password: string) => {
-  return instance.post("/users", {
+  return instance.post('/users', {
     username: nickname,
     email,
     password,
@@ -11,7 +11,7 @@ const register = (nickname: string, email: string, password: string) => {
 
 const login = (email: string, password: string) => {
   return instance
-    .post("/users/login", {
+    .post('/users/login', {
       email,
       password,
     })
@@ -19,9 +19,9 @@ const login = (email: string, password: string) => {
       if (response.data) {
         const { accessToken, refreshToken, name } = response.data;
 
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
-        localStorage.setItem("username", name);
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        localStorage.setItem('username', name);
       }
 
       return response.data;
@@ -31,7 +31,7 @@ const login = (email: string, password: string) => {
 const logout = (refreshToken: string, accessToken: string) => {
   return instance
     .post(
-      "/users/logout",
+      '/users/logout',
       {
         refreshToken,
       },
@@ -39,13 +39,13 @@ const logout = (refreshToken: string, accessToken: string) => {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-      }
+      },
     )
     .then((response) => {
       if (response.status === 200) {
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
-        localStorage.removeItem("username");
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('username');
       }
     })
     .catch((err) => console.log(err));
@@ -53,7 +53,7 @@ const logout = (refreshToken: string, accessToken: string) => {
 
 const reissuanceToken = (refreshToken: string) => {
   return axios
-    .post("http://localhost:8080/user/refreshToken", {
+    .post('http://localhost:8080/user/refreshToken', {
       refreshToken,
     })
     .then((response) => {

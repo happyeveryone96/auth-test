@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import css from "app/components/Mentor/Mentor.module.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import css from 'app/components/Mentor/Mentor.module.css';
 
 interface MentorType {
   mentor: {
@@ -19,22 +19,22 @@ const Mentor = (props: MentorType) => {
     props.mentor;
 
   return (
-    <div className={css["mentor-container"]}>
+    <div className={css['mentor-container']}>
       <div className="article-preview">
-        <div className={css["profile"]}>
-          <div className={css["profile-box"]}>
+        <div className={css['profile']}>
+          <div className={css['profile-box']}>
             <Link to={`/profile/${authorId}`}>
               <img
-                className={css["author-profile-img"]}
+                className={css['author-profile-img']}
                 src={authorImage}
                 alt="강사 프로필 사진"
               />
             </Link>
-            <div className={css["author-box"]}>
-              <Link className={css["author"]} to={`/mentor/${authorId}`}>
+            <div className={css['author-box']}>
+              <Link className={css['author']} to={`/mentor/${authorId}`}>
                 {authorName}
               </Link>
-              <div className={css["date"]}>{createdAt}</div>
+              <div className={css['date']}>{createdAt}</div>
             </div>
           </div>
         </div>
