@@ -236,6 +236,10 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       state.user = null;
     },
+    dummyLoginFulfilled: (state, action) => {
+      state.isLoggedIn = false;
+      // state.user = 'User1';
+    },
   },
 });
 

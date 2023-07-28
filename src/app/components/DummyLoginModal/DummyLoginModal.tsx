@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import './LoginModal.css';
+import './DummyLoginModal.css';
 import { clearMessage } from 'app/slices/message';
 import FormField from '../FormField/FormField';
 import { Form, Formik } from 'formik';
@@ -12,8 +12,8 @@ import { AppDispatch } from 'app/store';
 
 interface LoginModalProps {
   isOpen: boolean;
-  close: () => void;
   setIsDummyLoggedIn: Dispatch<SetStateAction<boolean>>;
+  close: () => void;
 }
 
 interface MessageType {
@@ -22,7 +22,7 @@ interface MessageType {
   };
 }
 
-const LoginModal: React.FC<LoginModalProps> = ({
+const DummyLoginModal: React.FC<LoginModalProps> = ({
   isOpen,
   close,
   setIsDummyLoggedIn,
@@ -93,7 +93,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
   function hasEmptyString(obj: any) {
     for (const key in obj) {
-      if (obj.prototype.hasOwnProperty.call(key) && obj[key] === '') {
+      if (obj.prototype?.hasOwnProperty.call(key) && obj[key] === '') {
         return true;
       }
     }
@@ -104,17 +104,19 @@ const LoginModal: React.FC<LoginModalProps> = ({
     formValue: { email: string; password: string },
     errors: any,
   ) => {
-    const { email, password } = formValue;
-    if (!isObjectEmpty(errors) && !hasEmptyString(formValue)) {
-      setIsDummyLoggedIn(true);
-      // dispatch(login({ email, password }))
-      //   .unwrap()
-      //   .then(() => {
-      //     navigate('/');
-      //     close();
-      //   })
-      //   .catch((err: any) => console.log(err));
-    }
+    setIsDummyLoggedIn(true);
+    navigate('/');
+    close();
+    // const { email, password } = formValue;
+    // if (!isObjectEmpty(errors) && !hasEmptyString(formValue)) {
+    //   dispatch(login({ email, password }))
+    //     .unwrap()
+    //     .then(() => {
+    //       navigate('/');
+    //       close();
+    //     })
+    //     .catch((err: any) => console.log(err));
+    // }
   };
 
   return (
@@ -222,4 +224,4 @@ const LoginModal: React.FC<LoginModalProps> = ({
   );
 };
 
-export default LoginModal;
+export default DummyLoginModal;
