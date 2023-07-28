@@ -105,7 +105,7 @@ const Navbar = () => {
         <div className="nav-top-left">
           <div>
             <Link to={'/'} className="navbar-brand">
-              GPTUs
+              REBOAST
             </Link>
           </div>
           <input type="text" />
