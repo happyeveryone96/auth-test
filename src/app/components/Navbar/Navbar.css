@@ -30,6 +30,7 @@
   line-height: 70px;
   letter-spacing: -0.96px;
   margin-right: 19px;
+  cursor: pointer;
 }
 
 .schedule {
@@ -39,6 +40,7 @@
   font-weight: 500;
   line-height: 70px;
   letter-spacing: -0.96px;
+  cursor: pointer;
 }
 
 .user-guide img {
@@ -179,6 +181,7 @@
   font-weight: 500;
   line-height: 28px;
   letter-spacing: -0.96px;
+  cursor: pointer;
 }
 
 .sub-lecture-container {

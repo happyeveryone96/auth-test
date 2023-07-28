@@ -5,6 +5,7 @@ import { reset } from 'app/slices/auth';
 import { logout } from 'app/slices/auth';
 import { useLocation } from 'react-router-dom';
 import LoginModal from 'app/components/LoginModal/LoginModal';
+import DummyLoginModal from 'app/components/DummyLoginModal/DummyLoginModal';
 import 'app/components/Navbar/Navbar.css';
 import { AppDispatch } from 'app/store';
 
@@ -27,6 +28,8 @@ const Navbar = () => {
   const isMentorPage = pathname === '/mentor';
 
   const { isLoggedIn } = useSelector((state: AuthState) => state.auth);
+
+  const [isDummyLoggedIn, setIsDummyLoggedIn] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -92,7 +95,12 @@ const Navbar = () => {
 
   return (
     <>
-      <LoginModal isOpen={isModalOpen} close={closeModal} />
+      {/* <LoginModal isOpen={isModalOpen} close={closeModal} /> */}
+      <DummyLoginModal
+        isOpen={isModalOpen}
+        close={closeModal}
+        setIsDummyLoggedIn={setIsDummyLoggedIn}
+      />
       <div className="nav-top">
         <div className="nav-top-left">
           <div>
@@ -106,8 +114,14 @@ const Navbar = () => {
           </div>
         </div>
         <div className="nav-top-right">
-          {isLoggedIn ? (
-            <Link to="" className="nav-link" onClick={logOut}>
+          {/* {isLoggedIn ? ( */}
+          {isDummyLoggedIn ? (
+            // <Link to="" className="nav-link" onClick={logOut}>
+            <Link
+              to=""
+              className="nav-link"
+              onClick={() => setIsDummyLoggedIn(false)}
+            >
               로그아웃
             </Link>
           ) : (
@@ -122,17 +136,18 @@ const Navbar = () => {
             </>
           )}
 
-          <div className="tutor">GPTUS 선생님 되는 방법</div>
+          <div className="tutor" onClick={() => alert('준비중입니다.')}>
+            GPTUS 선생님 되는 방법
+          </div>
         </div>
       </div>
-
       <nav className="navbar navbar-expand navbar-white">
         <div className="nav-container">
           <div className="nav-container-left">
-            <div className="menu">
+            {/* <div className="menu">
               <img src="/images/menu.png" alt="메뉴" />
               <span>전체보기</span>
-            </div>
+            </div> */}
             <div
               className="nav-container-center"
               onMouseEnter={(e) => enterDiv(e)}
@@ -154,13 +169,17 @@ const Navbar = () => {
               >
                 상담
               </Link>
-              <Link
+              {/* <Link
                 to={'/mentor'}
                 className={`nav-link ${isMentorPage && 'selected'}`}
               >
                 강사
-              </Link>
-              <Link to="#" className="nav-link">
+              </Link> */}
+              <Link
+                to="#"
+                className="nav-link"
+                onClick={() => alert('준비중입니다.')}
+              >
                 커뮤니티
               </Link>
 
@@ -175,13 +194,13 @@ const Navbar = () => {
             </div>
           </div>
           <div className="nav-container-right">
-            <div className="user-guide">
+            <div className="user-guide" onClick={() => alert('준비중입니다.')}>
               <span>
                 <img src="/images/guide.png" alt="이용자 가이드" />
                 이용자 가이드
               </span>
             </div>
-            <div className="schedule">
+            <div className="schedule" onClick={() => alert('준비중입니다.')}>
               <span>
                 <img src="/images/star.png" alt="내강의 일정" />
                 내강의 일정
@@ -190,8 +209,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-
-      {isMouseOver && (
+      {/* {isMouseOver && (
         <div
           className="sub-lecture-container"
           onMouseLeave={(e) => leaveDiv(e)}
@@ -248,7 +266,7 @@ const Navbar = () => {
             <li className="category-list">협업</li>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };

@@ -192,7 +192,7 @@ const Register = () => {
     for (let key in obj) {
       if (
         key !== 'address' &&
-        obj.prototype.hasOwnProperty.call(key) &&
+        obj.prototype?.hasOwnProperty.call(key) &&
         obj[key] === ''
       ) {
         return true;
@@ -202,16 +202,21 @@ const Register = () => {
   }
 
   const handleRegister = (values, errors) => {
-    const { nickname, email, password } = values;
+    alert('회원가입이 완료되었습니다.');
+    navigate('/');
+    window.scrollTo(0, 0);
+    // const { nickname, email, password } = values;
 
-    if (!isObjectEmpty(errors) && !hasEmptyString(values)) {
-      dispatch(register({ nickname, email, password }))
-        .unwrap()
-        .then(() => {
-          navigate('/');
-        })
-        .catch((err) => console.log(err));
-    }
+    // if (!isObjectEmpty(errors) && !hasEmptyString(values)) {
+    //   alert('회원가입이 완료되었습니다.');
+    //   navigate('/');
+    // dispatch(register({ nickname, email, password }))
+    //   .unwrap()
+    //   .then(() => {
+    //     navigate('/');
+    //   })
+    //   .catch((err) => console.log(err));
+    // }
   };
 
   const handleButtonClick = () => {
