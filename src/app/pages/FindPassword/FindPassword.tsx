@@ -41,7 +41,12 @@ const FindPassword = () => {
 
   return (
     <div>
-      <Formik initialValues={initialValues} validationSchema={validationSchema}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        onSubmit={() => {}}
+      >
         {({ errors, touched }) => (
           <Form>
             <div className="find-pw-container">
@@ -66,7 +71,12 @@ const FindPassword = () => {
         )}
       </Formik>
 
-      <Formik initialValues={initialValues} validationSchema={validationSchema}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        onSubmit={() => {}}
+      >
         {({ errors, touched }) => (
           <Form>
             <div className="find-pw-container second">
